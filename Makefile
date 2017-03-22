@@ -1,5 +1,4 @@
 FILES += ./src/glome-api-service.js
-FILES += ./src/features/util.js
 
 HTTP_SERVER = ./node_modules/http-server/bin/http-server
 UGLIFY = ./node_modules/uglifyjs/bin/uglifyjs
