@@ -2,10 +2,6 @@
 (function (exports) {
 	'use strict';
 
-	exports.glomeApiService = glomeApiService;
-
-	function glomeApiService() {
-		console.log('init');
-	}
+	exports.glomeApiService = {};
 
 })(this);

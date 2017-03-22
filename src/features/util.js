@@ -8,4 +8,4 @@
 		console.log('util');
 	}
 
-})(this.glomeApiService || (this.glomeApiService = {}));
+})(this.glomeApiService);
