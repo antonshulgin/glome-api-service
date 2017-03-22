@@ -7,7 +7,6 @@
   "author": "Anton Shulgin <anton.shulgin@gmx.com>",
   "license": "ISC",
   "devDependencies": {
-    "concat": "*",
     "http-server": "*",
     "uglifyjs": "*"
   }
