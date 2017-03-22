@@ -16,8 +16,38 @@
 		externals.setAppSecret = setAppSecret;
 		externals.getBaseUrl = getBaseUrl;
 		externals.setBaseUrl = setBaseUrl;
+		externals.produceGet = produceGet;
 
 		return externals;
+
+		function produceGet(path) {
+			if (!util.isNonEmptyString(path)) {
+				return util.panic('path is missing');
+			}
+			return new Promise(promiseProduceGet);
+
+			function promiseProduceGet(resolve, reject) {
+				const baseUrl = getBaseUrl();
+				if (!baseUrl) {
+					return util.panic('baseUrl is missing');
+				}
+				const url = baseUrl + path;
+				const request = new XMLHttpRequest();
+				request.addEventListener('load', onLoad, false);
+				request.addEventListener('error', onError, false);
+				request.open('GET', url);
+				request.setRequestHeader('X-Glome-Application-ID', getAppKey());
+				request.send();
+
+				function onLoad() {
+					return (request.status < 400) ? resolve(request) : reject(request);
+				}
+
+				function onError() {
+					return reject(request);
+				}
+			}
+		}
 
 		function getBaseUrl() {
 			return internals.baseUrl;
@@ -27,7 +57,7 @@
 			if (!util.isNonEmptyString(baseUrl)) {
 				return util.panic('Failed to set baseUrl: `' + baseUrl + '`');
 			}
-			internals.baseUrl = baseUrl;
+			internals.baseUrl = baseUrl.replace(/\/*$/, '');
 			return getBaseUrl();
 		}
 
