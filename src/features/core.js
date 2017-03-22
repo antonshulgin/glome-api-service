@@ -16,6 +16,8 @@
 		externals.setAppSecret = setAppSecret;
 		externals.getBaseUrl = getBaseUrl;
 		externals.setBaseUrl = setBaseUrl;
+		externals.getAuthToken = getAuthToken;
+		externals.setAuthToken = setAuthToken;
 		externals.produceGet = produceGet;
 
 		return externals;
@@ -47,6 +49,18 @@
 					return reject(request);
 				}
 			}
+		}
+
+		function getAuthToken() {
+			return internals.authToken;
+		}
+
+		function setAuthToken(authToken) {
+			if (!util.isNonEmptyString(authToken)) {
+				return util.panic('Failed to set authToken: `' + authToken + '`');
+			}
+			internals.authToken = authToken;
+			return getAuthToken();
 		}
 
 		function getBaseUrl() {
