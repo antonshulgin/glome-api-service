@@ -9,8 +9,14 @@
 
 		externals.panic = panic;
 		externals.isNonEmptyString = isNonEmptyString;
+		externals.isNonEmptyObject = isNonEmptyObject;
 
 		return externals;
+
+		function isNonEmptyObject(item) {
+			return (toStringCall(item) === '[object Object]') &&
+				(Object.keys(item).length > 0);
+		}
 
 		function isNonEmptyString(item) {
 			return (toStringCall(item) === '[object String]') &&

@@ -18,11 +18,11 @@
 		externals.setBaseUrl = setBaseUrl;
 		externals.getAuthToken = getAuthToken;
 		externals.setAuthToken = setAuthToken;
-		externals.produceGet = produceGet;
+		externals.get = get;
 
 		return externals;
 
-		function produceGet(path) {
+		function get(path) {
 			if (!util.isNonEmptyString(path)) {
 				return util.panic('path is missing');
 			}
@@ -33,12 +33,16 @@
 				if (!baseUrl) {
 					return util.panic('baseUrl is missing');
 				}
+				const appKey = getAppKey();
+				if (!appKey) {
+					return util.panic('appKey is missing');
+				}
 				const url = baseUrl + path;
 				const request = new XMLHttpRequest();
 				request.addEventListener('load', onLoad, false);
 				request.addEventListener('error', onError, false);
 				request.open('GET', url);
-				request.setRequestHeader('X-Glome-Application-ID', getAppKey());
+				request.setRequestHeader('X-Glome-Application-ID', appKey);
 				request.send();
 
 				function onLoad() {
