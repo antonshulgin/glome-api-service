@@ -8,6 +8,6 @@
   "license": "ISC",
   "devDependencies": {
     "http-server": "*",
-    "uglifyjs": "*"
+    "uglify-js": "*"
   }
 }
