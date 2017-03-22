@@ -42,7 +42,9 @@
 				request.send();
 
 				function onLoad() {
-					return (request.status < 400) ? resolve(request) : reject(request);
+					if (request.status <= 0) { return reject(request); }
+					if (request.status < 400) { return reject(request); }
+					return resolve(request);
 				}
 
 				function onError() {
