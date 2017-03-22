@@ -1,14 +1,14 @@
 {
-	"name": "glome-api-service",
-	"version": "1.0.0",
-	"description": "Glome API wrapper to use on the client size.",
-	"main": "index.js",
-	"scripts": {
-	},
-	"author": "Anton Shulgin <anton.shulgin@gmx.com>",
-	"license": "ISC",
-	"devDependencies": {
-		"concat": "*",
-		"uglifyjs": "*"
-	}
+  "name": "glome-api-service",
+  "version": "1.0.0",
+  "description": "Glome API wrapper to use on the client side.",
+  "main": "index.js",
+  "scripts": {},
+  "author": "Anton Shulgin <anton.shulgin@gmx.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "concat": "*",
+    "http-server": "*",
+    "uglifyjs": "*"
+  }
 }
