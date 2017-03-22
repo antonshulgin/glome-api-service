@@ -6,7 +6,8 @@ HTTP_SERVER = ./node_modules/http-server/bin/http-server
 
 UGLIFY = ./node_modules/uglify-js/bin/uglifyjs
 UGLIFY_PARAMS += -m -c -o ./dist/glome-api-service.min.js
-UGLIFY_PARAMS += --source-map=./dist/glome-api-service.min.map.js --source-map-include-sources -p relative
+UGLIFY_PARAMS += --source-map=./dist/glome-api-service.min.map.js
+UGLIFY_PARAMS += --source-map-include-sources -p relative
 
 build:
 	make clean
