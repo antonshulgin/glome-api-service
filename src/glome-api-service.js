@@ -56,7 +56,7 @@
 
 	function isNonEmptyString(item) {
 		return (toStringCall(item) === '[object String]') &&
-			(item.trim().length > 0);
+			(item.length > 0);
 	}
 
 	function toStringCall(item) {

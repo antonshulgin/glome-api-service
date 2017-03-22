@@ -3,10 +3,9 @@ FILES += ./src/glome-api-service.js
 HTTP_SERVER = ./node_modules/http-server/bin/http-server
 UGLIFY = ./node_modules/uglifyjs/bin/uglifyjs
 
-all:
+update-demo:
 	make build
 	cp ./dist/glome-api-service.min.js ./demo/
-	make serve
 
 build:
 	make clean
