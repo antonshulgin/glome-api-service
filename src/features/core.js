@@ -76,7 +76,6 @@
 			}
 		}
 
-
 		function getAuthToken() {
 			return internals.authToken;
 		}
