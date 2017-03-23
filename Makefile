@@ -17,6 +17,9 @@ UGLIFY_PARAMS += -m -c -o ./dist/glome-api-service.min.js
 UGLIFY_PARAMS += --source-map=./dist/glome-api-service.min.map.js
 UGLIFY_PARAMS += --source-map-include-sources -p relative
 
+watch:
+	fswatch ${FILES} | xargs -n1 sh -c 'make update-demo'
+
 uglify:
 	${UGLIFY} ${FILES} ${UGLIFY_PARAMS}
 
