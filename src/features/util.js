@@ -10,8 +10,14 @@
 		externals.panic = panic;
 		externals.isNonEmptyString = isNonEmptyString;
 		externals.isNonEmptyObject = isNonEmptyObject;
+		externals.isNumber = isNumber;
 
 		return externals;
+
+		function isNumber(item) {
+			return (toStringCall(item) === '[object Number]') &&
+				isFinite(item);
+		}
 
 		function isNonEmptyObject(item) {
 			return (toStringCall(item) === '[object Object]') &&

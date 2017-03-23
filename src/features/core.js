@@ -45,6 +45,9 @@
 				request.addEventListener('error', onError, false);
 				request.open(params.method.toUpperCase(), url, true);
 				if (util.isNonEmptyObject(params.includeHeaders)) {
+					if (params.includeHeaders.authToken) {
+						request.setRequestHeader('Authorization', getAuthToken());
+					}
 					if (params.includeHeaders.appId) {
 						request.setRequestHeader('X-Glome-Application-ID', getAppId());
 					}

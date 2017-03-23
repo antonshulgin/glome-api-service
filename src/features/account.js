@@ -12,8 +12,36 @@
 		const util = glomeApiService.util;
 
 		externals.createAccount = createAccount;
+		externals.createLinkingToken = createLinkingToken;
+		externals.createLinkedAccount = createLinkedAccount;
 
 		return externals;
+
+		function createLinkedAccount() {
+			const params = {
+				method: 'post',
+				path: '/account/link',
+				includeHeaders: {
+					appId: true
+				}
+			};
+			return core.produceRequest(params);
+		}
+
+		function createLinkingToken(lifetimeMinutes) {
+			if (!util.isNumber(lifetimeMinutes)) {
+				return util.panic('No valid lifetimeMinutes provided');
+			}
+			const params = {
+				method: 'get',
+				path: '/account/link?validfor=' + lifetimeMinutes,
+				includeHeaders: {
+					appId: true,
+					authToken: true
+				}
+			};
+			return core.produceRequest(params);
+		}
 
 		function createAccount() {
 			const params = {
