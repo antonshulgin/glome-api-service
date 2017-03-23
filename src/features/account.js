@@ -15,8 +15,25 @@
 		externals.createLinkingToken = createLinkingToken;
 		externals.createLinkedAccount = createLinkedAccount;
 		externals.getAccount = getAccount;
+		externals.setPublicData = setPublicData;
 
 		return externals;
+
+		function setPublicData(publicData) {
+			if (!util.isNonEmptyObject(publicData)) {
+				return util.panic('No valid publicData provided');
+			}
+			const params = {
+				method: 'post',
+				path: '/account/data',
+				includeHeaders: {
+					authToken: true,
+					appId: true
+				},
+				data: publicData
+			};
+			return core.produceRequest(params);
+		}
 
 		function getAccount() {
 			const params = {
