@@ -5,7 +5,7 @@
 	glomeApiService.account = account();
 
 	function account() {
-		const internals = {};
+		//const internals = {};
 		const externals = {};
 
 		const core = glomeApiService.core;
@@ -14,15 +14,35 @@
 		externals.createAccount = createAccount;
 		externals.createLinkingToken = createLinkingToken;
 		externals.createLinkedAccount = createLinkedAccount;
+		externals.getAccount = getAccount;
 
 		return externals;
 
-		function createLinkedAccount() {
+		function getAccount() {
+			const params = {
+				method: 'get',
+				path: '/account',
+				includeHeaders: {
+					authToken: true,
+					appId: true
+				}
+			};
+			return core.produceRequest(params);
+		}
+
+		function createLinkedAccount(linkId) {
+			if (!util.isNonEmptyString(linkId)) {
+				return util.panic('No valid linkId provided');
+			}
 			const params = {
 				method: 'post',
 				path: '/account/link',
+				contentType: 'application/json',
 				includeHeaders: {
 					appId: true
+				},
+				data: {
+					linkId: linkId
 				}
 			};
 			return core.produceRequest(params);

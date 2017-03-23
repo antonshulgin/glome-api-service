@@ -54,8 +54,15 @@
 					if (params.includeHeaders.appSecret) {
 						request.setRequestHeader('X-Glome-Application-Secret', getAppSecret());
 					}
+					if (util.isNonEmptyString(params.contentType)) {
+						request.setRequestHeader('Content-Type', params.contentType);
+					}
 				}
-				request.send();
+				if (util.isNonEmptyObject(params.data)) {
+					request.send(params.data);
+				} else {
+					request.send();
+				}
 
 				function onLoad() {
 					if (request.status <= 0) { return reject(request); }
