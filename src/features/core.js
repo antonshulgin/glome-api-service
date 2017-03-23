@@ -10,44 +10,53 @@
 
 		const util = glomeApiService.util;
 
-		externals.getAppKey = getAppKey;
-		externals.setAppKey = setAppKey;
+		externals.getAppId = getAppId;
+		externals.setAppId = setAppId;
 		externals.getAppSecret = getAppSecret;
 		externals.setAppSecret = setAppSecret;
 		externals.getBaseUrl = getBaseUrl;
 		externals.setBaseUrl = setBaseUrl;
 		externals.getAuthToken = getAuthToken;
 		externals.setAuthToken = setAuthToken;
-		externals.get = get;
+		externals.produceRequest = produceRequest;
 
 		return externals;
 
-		function get(path) {
-			if (!util.isNonEmptyString(path)) {
-				return util.panic('path is missing');
+		function produceRequest(params) {
+			const baseUrl = getBaseUrl();
+			if (!baseUrl) {
+				return util.panic('baseUrl is missing');
 			}
-			return new Promise(promiseProduceGet);
+			if (!util.isNonEmptyObject(params)) {
+				return util.panic('No params provided');
+			}
+			if (!util.isNonEmptyString(params.method)) {
+				return util.panic('No method provided');
+			}
+			if (!util.isNonEmptyString(params.path)) {
+				return util.panic('No path provided');
+			}
+			return new Promise(promiseProduceRequest);
 
-			function promiseProduceGet(resolve, reject) {
-				const baseUrl = getBaseUrl();
-				if (!baseUrl) {
-					return util.panic('baseUrl is missing');
-				}
-				const appKey = getAppKey();
-				if (!appKey) {
-					return util.panic('appKey is missing');
-				}
-				const url = baseUrl + path;
+			function promiseProduceRequest(resolve, reject) {
+				const url = baseUrl + params.path;
 				const request = new XMLHttpRequest();
 				request.addEventListener('load', onLoad, false);
 				request.addEventListener('error', onError, false);
-				request.open('GET', url);
-				request.setRequestHeader('X-Glome-Application-ID', appKey);
+				request.open(params.method.toUpperCase(), url, true);
+				if (util.isNonEmptyObject(params.includeHeaders)) {
+					if (params.includeHeaders.appId) {
+						request.setRequestHeader('X-Glome-Application-ID', getAppId());
+					}
+					if (params.includeHeaders.appSecret) {
+						request.setRequestHeader('X-Glome-Application-Secret', getAppSecret());
+					}
+				}
 				request.send();
 
 				function onLoad() {
 					if (request.status <= 0) { return reject(request); }
-					if (request.status < 400) { return reject(request); }
+					if (request.status >= 400) { return reject(request); }
 					return resolve(request);
 				}
 
@@ -56,6 +65,7 @@
 				}
 			}
 		}
+
 
 		function getAuthToken() {
 			return internals.authToken;
@@ -93,16 +103,16 @@
 			return getAppSecret();
 		}
 
-		function getAppKey() {
-			return internals.appKey;
+		function getAppId() {
+			return internals.appId;
 		}
 
-		function setAppKey(appKey) {
-			if (!util.isNonEmptyString(appKey)) {
-				return util.panic('Failed to set appKey: `' + appKey + '`');
+		function setAppId(appId) {
+			if (!util.isNonEmptyString(appId)) {
+				return util.panic('Failed to set appId: `' + appId + '`');
 			}
-			internals.appKey = appKey;
-			return getAppKey();
+			internals.appId = appId;
+			return getAppId();
 		}
 	}
 
