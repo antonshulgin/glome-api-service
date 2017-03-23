@@ -3,6 +3,7 @@ FILES += ./src/features/util.js
 FILES += ./src/features/core.js
 FILES += ./src/features/account.js
 FILES += ./src/features/user.js
+FILES += ./src/features/social-objects.js
 
 build:
 	make clean
