@@ -71,7 +71,7 @@
 			}
 			const params = {
 				method: 'get',
-				path: '/account/link?validfor=' + lifetimeMinutes,
+				path: '/account/link?validfor=' + encodeURIComponent(lifetimeMinutes),
 				includeHeaders: {
 					appId: true,
 					authToken: true
