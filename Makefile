@@ -2,6 +2,7 @@ FILES += ./src/glome-api-service.js
 FILES += ./src/features/util.js
 FILES += ./src/features/core.js
 FILES += ./src/features/account.js
+FILES += ./src/features/user.js
 
 build:
 	make clean
