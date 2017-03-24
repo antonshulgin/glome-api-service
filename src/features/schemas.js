@@ -12,8 +12,24 @@
 		const util = glomeApiService.util;
 
 		externals.createSchema = createSchema;
+		externals.deleteSchema = deleteSchema;
 
 		return externals;
+
+		function deleteSchema(schemaName) {
+			if (!util.isNonEmptyString(schemaName)) {
+				return core.panic('No valid schemaName provided');
+			}
+			const params = {
+				method: 'delete',
+				path: '/schemas/' + encodeURIComponent(schemaName),
+				includeHeaders: {
+					appId: true,
+					appSecret: true
+				}
+			};
+			return core.produceRequest(params);
+		}
 
 		function createSchema(schemaModel) {
 			if (!util.isNonEmptyObject(schemaModel)) {
