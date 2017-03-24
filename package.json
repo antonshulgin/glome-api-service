@@ -6,6 +6,9 @@
   "scripts": {},
   "author": "Anton Shulgin <anton.shulgin@gmx.com>",
   "license": "ISC",
+	"files": [
+		"./dist/glome-api-service.min.js"
+	],
   "devDependencies": {
     "http-server": "*",
     "uglify-js": "*"
