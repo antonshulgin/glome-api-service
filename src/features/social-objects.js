@@ -13,8 +13,27 @@
 
 		externals.createSocialObject = createSocialObject;
 		externals.deleteSocialObject = deleteSocialObject;
+		externals.getSocialObject = getSocialObject;
 
 		return externals;
+
+		function getSocialObject(schemaName, objectId) {
+			if (!util.isNonEmptyString(schemaName)) {
+				return core.panic('No valid schemaName provided');
+			}
+			if (!util.isNonEmptyString(objectId)) {
+				return core.panic('No valid objectId provided');
+			}
+			const params = {
+				method: 'get',
+				path: encodeURIComponent(schemaName) + '/' + encodeURIComponent(objectId),
+				includeHeaders: {
+					authToken: true,
+					appId: true
+				}
+			};
+			return core.produceRequest(params);
+		}
 
 		function deleteSocialObject(schemaName, objectId) {
 			if (!util.isNonEmptyString(schemaName)) {
