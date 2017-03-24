@@ -6,6 +6,7 @@ FILES += ./src/features/user.js
 FILES += ./src/features/social-objects.js
 FILES += ./src/features/schemas.js
 FILES += ./src/features/webhooks.js
+FILES += ./src/features/access-control-lists.js
 
 build:
 	make clean
