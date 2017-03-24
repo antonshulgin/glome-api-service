@@ -15,8 +15,28 @@
 		externals.deleteSchema = deleteSchema;
 		externals.getSchema = getSchema;
 		externals.listSchemas = listSchemas;
+		externals.replaceSchema = replaceSchema;
 
 		return externals;
+
+		function replaceSchema(schemaName, schemaModel) {
+			if (!util.isNonEmptyString(schemaName)) {
+				return core.panic('No valid schemaName provided');
+			}
+			if (!util.isNonEmptyObject(schemaModel)) {
+				return core.panic('No valid schemaModel provided');
+			}
+			const params = {
+				method: 'put',
+				path: '/schemas/' + encodeURIComponent(schemaName),
+				includeHeaders: {
+					appId: true,
+					appSecret: true
+				},
+				data: schemaModel
+			};
+			return core.produceRequest(params);
+		}
 
 		function listSchemas() {
 			const params = {
