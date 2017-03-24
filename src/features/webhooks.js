@@ -15,8 +15,28 @@
 		externals.deleteWebhook = deleteWebhook;
 		externals.getWebhook = getWebhook;
 		externals.listWebhooks = listWebhooks;
+		externals.replaceWebhook = replaceWebhook;
 
 		return externals;
+
+		function replaceWebhook(webhookId, webhookModel) {
+			if (!util.isNonEmptyString(webhookId)) {
+				return core.panic('No valid webhookId provided');
+			}
+			if (!util.isNonEmptyObject(webhookModel)) {
+				return core.panic('No valid webhookModel provided');
+			}
+			const params = {
+				method: 'put',
+				path: '/webhooks/' + encodeURIComponent(webhookId),
+				includeHeaders: {
+					appId: true,
+					appSecret: true
+				},
+				data: webhookModel
+			};
+			return core.produceRequest(params);
+		}
 
 		function listWebhooks() {
 			const params = {
@@ -60,9 +80,9 @@
 			return core.produceRequest(params);
 		}
 
-		function createWebhook(hookModel) {
-			if (!util.isNonEmptyObject(hookModel)) {
-				return core.panic('No valid hookModel provided');
+		function createWebhook(webhookModel) {
+			if (!util.isNonEmptyObject(webhookModel)) {
+				return core.panic('No valid webhookModel provided');
 			}
 			const params = {
 				method: 'post',
@@ -71,7 +91,7 @@
 					appId: true,
 					appSecret: true
 				},
-				data: hookModel
+				data: webhookModel
 			};
 			return core.produceRequest(params);
 		}
