@@ -14,8 +14,28 @@
 		externals.getListForObject = getListForObject;
 		externals.getListForSchema = getListForSchema;
 		externals.replaceListForObject = replaceListForObject;
+		externals.replaceListForSchema = replaceListForSchema;
 
 		return externals;
+
+		function replaceListForSchema(schemaName, listModel) {
+			if (!util.isNonEmptyString(schemaName)) {
+				return core.panic('No valid schemaName provided');
+			}
+			if (!util.isNonEmptyObject(listModel)) {
+				return core.panic('No valid listModel provided');
+			}
+			const params = {
+				method: 'put',
+				path: '/schemas/' + encodeURIComponent(schemaName),
+				includeHeaders: {
+					appId: true,
+					appSecret: true
+				},
+				data: listModel
+			};
+			return core.produceRequest(params);
+		}
 
 		function replaceListForObject(schemaName, socialObjectId, listModel) {
 			if (!util.isNonEmptyString(schemaName)) {
