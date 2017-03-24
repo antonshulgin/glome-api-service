@@ -14,8 +14,24 @@
 		externals.createSocialObject = createSocialObject;
 		externals.deleteSocialObject = deleteSocialObject;
 		externals.getSocialObject = getSocialObject;
+		externals.listSocialObjects = listSocialObjects;
 
 		return externals;
+
+		function listSocialObjects(schemaName) {
+			if (!util.isNonEmptyString(schemaName)) {
+				return core.panic('No valid schemaName provided');
+			}
+			const params = {
+				method: 'get',
+				path: '/' + encodeURIComponent(schemaName),
+				includeHeaders: {
+					authToken: true,
+					appId: true
+				}
+			};
+			return core.produceRequest(params);
+		}
 
 		function getSocialObject(schemaName, objectId) {
 			if (!util.isNonEmptyString(schemaName)) {
@@ -26,7 +42,7 @@
 			}
 			const params = {
 				method: 'get',
-				path: encodeURIComponent(schemaName) + '/' + encodeURIComponent(objectId),
+				path: '/' + encodeURIComponent(schemaName) + '/' + encodeURIComponent(objectId),
 				includeHeaders: {
 					authToken: true,
 					appId: true
@@ -44,7 +60,7 @@
 			}
 			const params = {
 				method: 'delete',
-				path: encodeURIComponent(schemaName) + '/' + encodeURIComponent(objectId),
+				path: '/' + encodeURIComponent(schemaName) + '/' + encodeURIComponent(objectId),
 				includeHeaders: {
 					authToken: true,
 					appId: true
