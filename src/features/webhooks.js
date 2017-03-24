@@ -12,8 +12,24 @@
 		const util = glomeApiService.util;
 
 		externals.createWebhook = createWebhook;
+		externals.deleteWebhook = deleteWebhook;
 
 		return externals;
+
+		function deleteWebhook(webhookId) {
+			if (!util.isNonEmptyString(webhookId)) {
+				return core.panic('No valid webhookId provided');
+			}
+			const params = {
+				method: 'delete',
+				path: '/webhooks/' + encodeURIComponent(webhookId),
+				includeHeaders: {
+					appId: true,
+					appSecret: true
+				}
+			};
+			return core.produceRequest(params);
+		}
 
 		function createWebhook(hookModel) {
 			if (!util.isNonEmptyObject(hookModel)) {
