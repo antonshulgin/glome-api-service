@@ -14,8 +14,21 @@
 		externals.createWebhook = createWebhook;
 		externals.deleteWebhook = deleteWebhook;
 		externals.getWebhook = getWebhook;
+		externals.listWebhooks = listWebhooks;
 
 		return externals;
+
+		function listWebhooks() {
+			const params = {
+				method: 'get',
+				path: '/webhooks',
+				includeHeaders: {
+					appId: true,
+					appSecret: true
+				}
+			};
+			return core.produceRequest(params);
+		}
 
 		function getWebhook(webhookId) {
 			if (!util.isNonEmptyString(webhookId)) {
