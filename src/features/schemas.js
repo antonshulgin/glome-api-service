@@ -16,8 +16,28 @@
 		externals.getSchema = getSchema;
 		externals.listSchemas = listSchemas;
 		externals.replaceSchema = replaceSchema;
+		externals.updateFields = updateFields;
 
 		return externals;
+
+		function updateFields(schemaName, schemaFields) {
+			if (!util.isNonEmptyString(schemaName)) {
+				return core.panic('No valid schemaName provided');
+			}
+			if (!util.isNonEmptyObject(schemaFields)) {
+				return core.panic('No valid schemaFields provided');
+			}
+			const params = {
+				method: 'patch',
+				path: '/schemas/' + encodeURIComponent(schemaName),
+				includeHeaders: {
+					appId: true,
+					appSecret: true
+				},
+				data: schemaFields
+			};
+			return core.produceRequest(params);
+		}
 
 		function replaceSchema(schemaName, schemaModel) {
 			if (!util.isNonEmptyString(schemaName)) {
