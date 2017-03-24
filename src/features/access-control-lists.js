@@ -15,8 +15,51 @@
 		externals.getListForSchema = getListForSchema;
 		externals.replaceListForObject = replaceListForObject;
 		externals.replaceListForSchema = replaceListForSchema;
+		externals.updateListForObject = updateListForObject;
+		externals.updateListForSchema = updateListForSchema;
 
 		return externals;
+
+		function updateListForSchema(schemaName, listModel) {
+			if (!util.isNonEmptyString(schemaName)) {
+				return core.panic('No valid schemaName provided');
+			}
+			if (!util.isNonEmptyObject(listModel)) {
+				return core.panic('No valid listModel provided');
+			}
+			const params = {
+				method: 'patch',
+				path: '/schemas/' + encodeURIComponent(schemaName) + '/acl',
+				includeHeaders: {
+					appId: true,
+					appSecret: true
+				},
+				data: listModel
+			};
+			return core.produceRequest(params);
+		}
+
+		function updateListForObject(schemaName, socialObjectId, listModel) {
+			if (!util.isNonEmptyString(schemaName)) {
+				return core.panic('No valid schemaName provided');
+			}
+			if (!util.isNonEmptyString(socialObjectId)) {
+				return core.panic('No valid socialObjectId provided');
+			}
+			if (!util.isNonEmptyObject(listModel)) {
+				return core.panic('No valid listModel provided');
+			}
+			const params = {
+				method: 'patch',
+				path: '/schemas/' + encodeURIComponent(schemaName) + '/' + encodeURIComponent(socialObjectId) + '/acl',
+				includeHeaders: {
+					appId: true,
+					appSecret: true
+				},
+				data: listModel
+			};
+			return core.produceRequest(params);
+		}
 
 		function replaceListForSchema(schemaName, listModel) {
 			if (!util.isNonEmptyString(schemaName)) {
