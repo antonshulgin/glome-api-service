@@ -13,8 +13,24 @@
 
 		externals.createSchema = createSchema;
 		externals.deleteSchema = deleteSchema;
+		externals.getSchema = getSchema;
 
 		return externals;
+
+		function getSchema(schemaName) {
+			if (!util.isNonEmptyString(schemaName)) {
+				return core.panic('No valid schemaName provided');
+			}
+			const params = {
+				method: 'get',
+				path: '/schemas/' + encodeURIComponent(schemaName),
+				includeHeaders: {
+					appId: true,
+					appSecret: true
+				}
+			};
+			return core.produceRequest(params);
+		}
 
 		function deleteSchema(schemaName) {
 			if (!util.isNonEmptyString(schemaName)) {
