@@ -15,8 +15,31 @@
 		externals.deleteSocialObject = deleteSocialObject;
 		externals.getSocialObject = getSocialObject;
 		externals.listSocialObjects = listSocialObjects;
+		externals.replaceSocialObject = replaceSocialObject;
 
 		return externals;
+
+		function replaceSocialObject(schemaName, objectId, objectModel) {
+			if (!util.isNonEmptyString(schemaName)) {
+				return core.panic('No valid schemaName provided');
+			}
+			if (!util.isNonEmptyString(objectId)) {
+				return core.panic('No valid objectId provided');
+			}
+			if (!util.isNonEmptyObject(objectModel)) {
+				return core.panic('No valid objectModel provided');
+			}
+			const params = {
+				method: 'put',
+				path: '/' + encodeURIComponent(schemaName) + '/' + encodeURIComponent(objectId),
+				includeHeaders: {
+					authToken: true,
+					appId: true
+				},
+				data: objectModel
+			};
+			return core.produceRequest(params);
+		}
 
 		function listSocialObjects(schemaName) {
 			if (!util.isNonEmptyString(schemaName)) {
