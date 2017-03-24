@@ -36,5 +36,6 @@ update-demo:
 	cp ./dist/glome-api-service.min.js ./demo/
 	cp ./dist/glome-api-service.min.map.js ./demo/
 
+# https://github.com/emcrisostomo/fswatch
 watch:
 	fswatch ${FILES} | xargs -n1 sh -c 'make update-demo'
