@@ -12,8 +12,27 @@
 		const util = glomeApiService.util;
 
 		externals.createSocialObject = createSocialObject;
+		externals.deleteSocialObject = deleteSocialObject;
 
 		return externals;
+
+		function deleteSocialObject(schemaName, objectId) {
+			if (!util.isNonEmptyString(schemaName)) {
+				return core.panic('No valid schemaName provided');
+			}
+			if (!util.isNonEmptyString(objectId)) {
+				return core.panic('No valid objectId provided');
+			}
+			const params = {
+				method: 'delete',
+				path: encodeURIComponent(schemaName) + '/' + encodeURIComponent(objectId),
+				includeHeaders: {
+					authToken: true,
+					appId: true
+				}
+			};
+			return core.produceRequest(params);
+		}
 
 		function createSocialObject(schemaName, objectModel) {
 			if (!util.isNonEmptyString(schemaName)) {
