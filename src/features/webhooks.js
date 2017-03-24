@@ -13,8 +13,24 @@
 
 		externals.createWebhook = createWebhook;
 		externals.deleteWebhook = deleteWebhook;
+		externals.getWebhook = getWebhook;
 
 		return externals;
+
+		function getWebhook(webhookId) {
+			if (!util.isNonEmptyString(webhookId)) {
+				return core.panic('No valid webhookId provided');
+			}
+			const params = {
+				method: 'get',
+				path: '/webhooks/' + encodeURIComponent(webhookId),
+				includeHeaders: {
+					appId: true,
+					appSecret: true
+				}
+			};
+			return core.produceRequest(params);
+		}
 
 		function deleteWebhook(webhookId) {
 			if (!util.isNonEmptyString(webhookId)) {
