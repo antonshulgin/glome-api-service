@@ -10,6 +10,7 @@
 
 		const util = glomeApiService.util;
 
+		externals.panic = panic;
 		externals.getAppId = getAppId;
 		externals.setAppId = setAppId;
 		externals.getAppSecret = getAppSecret;
@@ -25,16 +26,16 @@
 		function produceRequest(params) {
 			const baseUrl = getBaseUrl();
 			if (!baseUrl) {
-				return util.panic('baseUrl is missing');
+				return panic('baseUrl is missing');
 			}
 			if (!util.isNonEmptyObject(params)) {
-				return util.panic('No params provided');
+				return panic('No params provided');
 			}
 			if (!util.isNonEmptyString(params.method)) {
-				return util.panic('No method provided');
+				return panic('No method provided');
 			}
 			if (!util.isNonEmptyString(params.path)) {
-				return util.panic('No path provided');
+				return panic('No path provided');
 			}
 			return new Promise(promiseProduceRequest);
 
@@ -82,7 +83,7 @@
 
 		function setAuthToken(authToken) {
 			if (!util.isNonEmptyString(authToken)) {
-				return util.panic('Failed to set authToken: `' + authToken + '`');
+				return panic('Failed to set authToken: `' + authToken + '`');
 			}
 			internals.authToken = authToken;
 			return getAuthToken();
@@ -94,7 +95,7 @@
 
 		function setBaseUrl(baseUrl) {
 			if (!util.isNonEmptyString(baseUrl)) {
-				return util.panic('Failed to set baseUrl: `' + baseUrl + '`');
+				return panic('Failed to set baseUrl: `' + baseUrl + '`');
 			}
 			internals.baseUrl = baseUrl.replace(/\/*$/, '');
 			return getBaseUrl();
@@ -106,7 +107,7 @@
 
 		function setAppSecret(appSecret) {
 			if (!util.isNonEmptyString(appSecret)) {
-				return util.panic('Failed to set appSecret: `' + appSecret + '`');
+				return panic('Failed to set appSecret: `' + appSecret + '`');
 			}
 			internals.appSecret = appSecret;
 			return getAppSecret();
@@ -118,10 +119,15 @@
 
 		function setAppId(appId) {
 			if (!util.isNonEmptyString(appId)) {
-				return util.panic('Failed to set appId: `' + appId + '`');
+				return panic('Failed to set appId: `' + appId + '`');
 			}
 			internals.appId = appId;
 			return getAppId();
+		}
+
+		function panic(reason) {
+			console.error('[glomeApiService] ' + reason);
+			return;
 		}
 	}
 

@@ -18,10 +18,10 @@
 
 		function setAppData(userId, appData) {
 			if (!util.isNonEmptyString(userId)) {
-				return util.panic('No valid userId provided');
+				return core.panic('No valid userId provided');
 			}
 			if (!util.isNonEmptyObject(appData)) {
-				return util.panic('No valid appData provided');
+				return core.panic('No valid appData provided');
 			}
 			const params = {
 				method: 'post', // `put` in the example from the doc
@@ -37,7 +37,7 @@
 
 		function getUser(userId) {
 			if (!util.isNonEmptyString(userId)) {
-				return util.panic('No valid userId provided');
+				return core.panic('No valid userId provided');
 			}
 			const params = {
 				method: 'get',

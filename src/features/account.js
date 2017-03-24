@@ -21,7 +21,7 @@
 
 		function setPublicData(publicData) {
 			if (!util.isNonEmptyObject(publicData)) {
-				return util.panic('No valid publicData provided');
+				return core.panic('No valid publicData provided');
 			}
 			const params = {
 				method: 'post',
@@ -49,7 +49,7 @@
 
 		function createLinkedAccount(linkId) {
 			if (!util.isNonEmptyString(linkId)) {
-				return util.panic('No valid linkId provided');
+				return core.panic('No valid linkId provided');
 			}
 			const params = {
 				method: 'post',
@@ -67,7 +67,7 @@
 
 		function createLinkingToken(lifetimeMinutes) {
 			if (!util.isNumber(lifetimeMinutes)) {
-				return util.panic('No valid lifetimeMinutes provided');
+				return core.panic('No valid lifetimeMinutes provided');
 			}
 			const params = {
 				method: 'get',

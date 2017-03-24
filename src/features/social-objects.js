@@ -17,10 +17,10 @@
 
 		function createSocialObject(schemaName, objectModel) {
 			if (!util.isNonEmptyString(schemaName)) {
-				return util.panic('No valid schemaName provided');
+				return core.panic('No valid schemaName provided');
 			}
 			if (!util.isNonEmptyObject(objectModel)) {
-				return util.panic('No valid objectModel provided');
+				return core.panic('No valid objectModel provided');
 			}
 			const params = {
 				method: 'post',

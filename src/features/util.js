@@ -7,7 +7,6 @@
 	function util() {
 		const externals = {};
 
-		externals.panic = panic;
 		externals.isNonEmptyString = isNonEmptyString;
 		externals.isNonEmptyObject = isNonEmptyObject;
 		externals.isNumber = isNumber;
@@ -31,11 +30,6 @@
 
 		function toStringCall(item) {
 			return Object.prototype.toString.call(item);
-		}
-
-		function panic(reason) {
-			console.error('[glomeApiService] ' + reason);
-			return;
 		}
 	}
 
