@@ -11,11 +11,27 @@
 		const core = glomeApiService.core;
 		const util = glomeApiService.util;
 
-		externals.getList = getList;
+		externals.getListForObject = getListForObject;
+		externals.getListForSchema = getListForSchema;
 
 		return externals;
 
-		function getList(schemaName, socialObjectId) {
+		function getListForSchema(schemaName) {
+			if (!util.isNonEmptyString(schemaName)) {
+				return core.panic('No valid schemaName provided');
+			}
+			const params = {
+				method: 'get',
+				path: '/schemas/' + encodeURIComponent(schemaName) + '/acl',
+				includeHeaders: {
+					appId: true,
+					appSecret: true
+				}
+			};
+			return core.produceRequest(params);
+		}
+
+		function getListForObject(schemaName, socialObjectId) {
 			if (!util.isNonEmptyString(schemaName)) {
 				return core.panic('No valid schemaName provided');
 			}
