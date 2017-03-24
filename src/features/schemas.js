@@ -14,8 +14,21 @@
 		externals.createSchema = createSchema;
 		externals.deleteSchema = deleteSchema;
 		externals.getSchema = getSchema;
+		externals.listSchemas = listSchemas;
 
 		return externals;
+
+		function listSchemas() {
+			const params = {
+				method: 'get',
+				path: '/schemas',
+				includeHeaders: {
+					appId: true,
+					appSecret: true
+				}
+			};
+			return core.produceRequest(params);
+		}
 
 		function getSchema(schemaName) {
 			if (!util.isNonEmptyString(schemaName)) {
