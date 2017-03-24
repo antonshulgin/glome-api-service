@@ -16,8 +16,28 @@
 		externals.getWebhook = getWebhook;
 		externals.listWebhooks = listWebhooks;
 		externals.replaceWebhook = replaceWebhook;
+		externals.updateWebhook = updateWebhook;
 
 		return externals;
+
+		function updateWebhook(webhookId, webhookModel) {
+			if (!util.isNonEmptyString(webhookId)) {
+				return core.panic('No valid webhookId provided');
+			}
+			if (!util.isNonEmptyObject(webhookModel)) {
+				return core.panic('No valid webhookModel provided');
+			}
+			const params = {
+				method: 'patch',
+				path: '/webhooks/' + encodeURIComponent(webhookId),
+				includeHeaders: {
+					appId: true,
+					appSecret: true
+				},
+				data: webhookModel
+			};
+			return core.produceRequest(params);
+		}
 
 		function replaceWebhook(webhookId, webhookModel) {
 			if (!util.isNonEmptyString(webhookId)) {
