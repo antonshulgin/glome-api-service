@@ -22,13 +22,9 @@
 		externals.isNonEmptyString = isNonEmptyString;
 		externals.isNonEmptyObject = isNonEmptyObject;
 		externals.isNumber = isNumber;
-		externals.getAppId = getAppId;
 		externals.setAppId = setAppId;
-		externals.getAppSecret = getAppSecret;
 		externals.setAppSecret = setAppSecret;
-		externals.getBaseUrl = getBaseUrl;
 		externals.setBaseUrl = setBaseUrl;
-		externals.getAuthToken = getAuthToken;
 		externals.setAuthToken = setAuthToken;
 		externals.produceRequest = produceRequest;
 
