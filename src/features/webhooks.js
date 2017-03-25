@@ -8,10 +8,10 @@
 		const ERR_NO_WEBHOOK_ID = 'No valid webhookId provided';
 		const ERR_NO_WEBHOOK_MODEL = 'No valid webhookModel provided';
 
-		const panic = glomeApiService.core.panic;
-		const isNonEmptyString = glomeApiService.core.isNonEmptyString;
-		const isNonEmptyObject = glomeApiService.core.isNonEmptyObject;
-		const produceRequest = glomeApiService.core.produceRequest;
+		const panic = glomeApiService.panic;
+		const isNonEmptyString = glomeApiService.isNonEmptyString;
+		const isNonEmptyObject = glomeApiService.isNonEmptyObject;
+		const produceRequest = glomeApiService;
 
 		const externals = {};
 

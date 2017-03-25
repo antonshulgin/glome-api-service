@@ -9,10 +9,10 @@
 		const ERR_NO_LIST_MODEL = 'No valid listModel provided';
 		const ERR_NO_SOCIAL_OBJECT_ID = 'No valid socialObjectId provided';
 
-		const panic = glomeApiService.core.panic;
-		const isNonEmptyString = glomeApiService.core.sNonEmptyString;
-		const isNonEmptyObject = glomeApiService.core.sNonEmptyObject;
-		const produceRequest = glomeApiService.core.produceRequest;
+		const panic = glomeApiService.panic;
+		const isNonEmptyString = glomeApiService.sNonEmptyString;
+		const isNonEmptyObject = glomeApiService.sNonEmptyObject;
+		const produceRequest = glomeApiService.produceRequest;
 
 		const externals = {};
 

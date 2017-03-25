@@ -9,10 +9,10 @@
 		const ERR_NO_OBJECT_ID = 'No valid objectId provided';
 		const ERR_NO_OBJECT_MODEL = 'No valid objectModel provided';
 
-		const panic = glomeApiService.core.panic;
-		const isNonEmptyString = glomeApiService.core.isNonEmptyString;
-		const isNonEmptyObject = glomeApiService.core.isNonEmptyObject;
-		const produceRequest = glomeApiService.core.produceRequest;
+		const panic = glomeApiService.panic;
+		const isNonEmptyString = glomeApiService.isNonEmptyString;
+		const isNonEmptyObject = glomeApiService.isNonEmptyObject;
+		const produceRequest = glomeApiService.produceRequest;
 
 		const externals = {};
 

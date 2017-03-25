@@ -9,10 +9,10 @@
 		const ERR_NO_SCHEMA_FIELDS = 'No valid schemaFields provided';
 		const ERR_NO_SCHEMA_MODEL = 'No valid schemaModel provided';
 
-		const panic = glomeApiService.core.panic;
-		const isNonEmptyString = glomeApiService.core.isNonEmptyString;
-		const isNonEmptyObject = glomeApiService.core.isNonEmptyObject;
-		const produceRequest = glomeApiService.core.produceRequest;
+		const panic = glomeApiService.panic;
+		const isNonEmptyString = glomeApiService.isNonEmptyString;
+		const isNonEmptyObject = glomeApiService.isNonEmptyObject;
+		const produceRequest = glomeApiService.produceRequest;
 
 		const externals = {};
 

@@ -8,10 +8,10 @@
 		const ERR_NO_USER_ID = 'No valid userId provided';
 		const ERR_NO_APP_DATA = 'No valid appData provided';
 
-		const panic = glomeApiService.core.panic;
-		const isNonEmptyString = glomeApiService.core.isNonEmptyString;
-		const isNonEmptyObject = glomeApiService.core.isNonEmptyObject;
-		const produceRequest = glomeApiService.core.produceRequest;
+		const panic = glomeApiService.panic;
+		const isNonEmptyString = glomeApiService.isNonEmptyString;
+		const isNonEmptyObject = glomeApiService.isNonEmptyObject;
+		const produceRequest = glomeApiService.produceRequest;
 
 		const externals = {};
 

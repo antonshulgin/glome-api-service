@@ -9,11 +9,11 @@
 		const ERR_NO_LINK_ID = 'No valid linkId provided';
 		const ERR_NO_LIFETIME = 'No valid lifetimeMinutes provided';
 
-		const panic = glomeApiService.core.panic;
-		const isNonEmptyString = glomeApiService.core.isNonEmptyString;
-		const isNonEmptyObject = glomeApiService.core.isNonEmptyObject;
-		const isNumber = glomeApiService.core.isNumber;
-		const produceRequest = glomeApiService.core.produceRequest;
+		const panic = glomeApiService.panic;
+		const isNonEmptyString = glomeApiService.isNonEmptyString;
+		const isNonEmptyObject = glomeApiService.isNonEmptyObject;
+		const isNumber = glomeApiService.isNumber;
+		const produceRequest = glomeApiService.produceRequest;
 
 		const externals = {};
 
