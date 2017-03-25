@@ -21,27 +21,26 @@
 		externals.getAuthToken = getAuthToken;
 		externals.setAuthToken = setAuthToken;
 		externals.produceRequest = produceRequest;
-		externals.applyUrlParams = applyUrlParams;
 
 		return externals;
 
-		function applyUrlParams(urlTemplate, urlParams) {
-			if (!isNonEmptyString(urlTemplate)) {
-				return panic('No urlTemplate provided');
+		function applyRouteParams(routeTemplate, routeParams) {
+			if (!isNonEmptyString(routeTemplate)) {
+				return panic('No routeTemplate provided');
 			}
-			if (!isNonEmptyObject(urlParams)) {
-				return panic('No urlParams provided');
+			if (!isNonEmptyObject(routeParams)) {
+				return panic('No routeParams provided');
 			}
-			Object.keys(urlParams)
+			Object.keys(routeParams)
 				.sort(sortLongestFirst)
-				.forEach(applyUrlParam);
-			return urlTemplate;
+				.forEach(applyRouteParam);
+			return routeTemplate;
 
-			function applyUrlParam(urlParam) {
-				var patternString = new RegExp('\:' + urlParam, 'gi');
-				urlTemplate = urlTemplate.replace(
+			function applyRouteParam(routeParam) {
+				var patternString = new RegExp('\:' + routeParam, 'gi');
+				routeTemplate = routeTemplate.replace(
 					patternString,
-					encodeURIComponent(urlParams[urlParam])
+					encodeURIComponent(routeParams[routeParam])
 				);
 			}
 
@@ -61,13 +60,16 @@
 			if (!isNonEmptyString(params.method)) {
 				return panic('No method provided');
 			}
-			if (!isNonEmptyString(params.path)) {
-				return panic('No path provided');
+			if (!isNonEmptyString(params.route)) {
+				return panic('No route provided');
+			}
+			if (isNonEmptyObject(params.routeParams)) {
+				params.route = applyRouteParams(params.route, params.routeParams);
 			}
 			return new Promise(promiseProduceRequest);
 
 			function promiseProduceRequest(resolve, reject) {
-				const url = baseUrl + params.path;
+				const url = baseUrl + params.route;
 				const request = new XMLHttpRequest();
 				request.addEventListener('load', onLoad, false);
 				request.addEventListener('error', onError, false);
