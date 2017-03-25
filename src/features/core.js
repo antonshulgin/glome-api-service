@@ -32,10 +32,12 @@
 			if (!isNonEmptyObject(urlParams)) {
 				return panic('No urlParams provided');
 			}
-			Object.keys(urlParams).sort(sortLongestFirst).forEach(applyParam);
+			Object.keys(urlParams)
+				.sort(sortLongestFirst)
+				.forEach(applyUrlParam);
 			return urlTemplate;
 
-			function applyParam(urlParam) {
+			function applyUrlParam(urlParam) {
 				var patternString = new RegExp('\:' + urlParam, 'gi');
 				urlTemplate = urlTemplate.replace(
 					patternString,
