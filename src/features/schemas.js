@@ -2,6 +2,10 @@
 (function (glomeApiService) {
 	'use strict';
 
+	const ERR_NO_SCHEMA_NAME = 'No valid schemaName provided';
+	const ERR_NO_SCHEMA_FIELDS = 'No valid schemaFields provided';
+	const ERR_NO_SCHEMA_MODEL = 'No valid schemaModel provided';
+
 	glomeApiService.schemas = schemas();
 
 	function schemas() {
@@ -21,10 +25,10 @@
 
 		function updateFields(schemaName, schemaFields) {
 			if (!core.isNonEmptyString(schemaName)) {
-				return core.panic('No valid schemaName provided');
+				return core.panic(ERR_NO_SCHEMA_NAME);
 			}
 			if (!core.isNonEmptyObject(schemaFields)) {
-				return core.panic('No valid schemaFields provided');
+				return core.panic(ERR_NO_SCHEMA_FIELDS);
 			}
 			const params = {
 				method: 'patch',
@@ -43,10 +47,10 @@
 
 		function replaceSchema(schemaName, schemaModel) {
 			if (!core.isNonEmptyString(schemaName)) {
-				return core.panic('No valid schemaName provided');
+				return core.panic(ERR_NO_SCHEMA_NAME);
 			}
 			if (!core.isNonEmptyObject(schemaModel)) {
-				return core.panic('No valid schemaModel provided');
+				return core.panic(ERR_NO_SCHEMA_MODEL);
 			}
 			const params = {
 				method: 'put',
@@ -77,7 +81,7 @@
 
 		function getSchema(schemaName) {
 			if (!core.isNonEmptyString(schemaName)) {
-				return core.panic('No valid schemaName provided');
+				return core.panic(ERR_NO_SCHEMA_NAME);
 			}
 			const params = {
 				method: 'get',
@@ -95,7 +99,7 @@
 
 		function deleteSchema(schemaName) {
 			if (!core.isNonEmptyString(schemaName)) {
-				return core.panic('No valid schemaName provided');
+				return core.panic(ERR_NO_SCHEMA_NAME);
 			}
 			const params = {
 				method: 'delete',
@@ -113,7 +117,7 @@
 
 		function createSchema(schemaModel) {
 			if (!core.isNonEmptyObject(schemaModel)) {
-				return core.panic('No valid schemaModel provided');
+				return core.panic(ERR_NO_SCHEMA_MODEL);
 			}
 			const params = {
 				method: 'post',

@@ -2,6 +2,9 @@
 (function (glomeApiService) {
 	'use strict';
 
+	const ERR_NO_WEBHOOK_ID = 'No valid webhookId provided';
+	const ERR_NO_WEBHOOK_MODEL = 'No valid webhookModel provided';
+
 	glomeApiService.webhooks = webhooks();
 
 	function webhooks() {
@@ -21,10 +24,10 @@
 
 		function updateWebhook(webhookId, webhookModel) {
 			if (!core.isNonEmptyString(webhookId)) {
-				return core.panic('No valid webhookId provided');
+				return core.panic(ERR_NO_WEBHOOK_ID);
 			}
 			if (!core.isNonEmptyObject(webhookModel)) {
-				return core.panic('No valid webhookModel provided');
+				return core.panic(ERR_NO_WEBHOOK_MODEL);
 			}
 			const params = {
 				method: 'patch',
@@ -43,10 +46,10 @@
 
 		function replaceWebhook(webhookId, webhookModel) {
 			if (!core.isNonEmptyString(webhookId)) {
-				return core.panic('No valid webhookId provided');
+				return core.panic(ERR_NO_WEBHOOK_ID);
 			}
 			if (!core.isNonEmptyObject(webhookModel)) {
-				return core.panic('No valid webhookModel provided');
+				return core.panic(ERR_NO_WEBHOOK_MODEL);
 			}
 			const params = {
 				method: 'put',
@@ -77,7 +80,7 @@
 
 		function getWebhook(webhookId) {
 			if (!core.isNonEmptyString(webhookId)) {
-				return core.panic('No valid webhookId provided');
+				return core.panic(ERR_NO_WEBHOOK_ID);
 			}
 			const params = {
 				method: 'get',
@@ -95,7 +98,7 @@
 
 		function deleteWebhook(webhookId) {
 			if (!core.isNonEmptyString(webhookId)) {
-				return core.panic('No valid webhookId provided');
+				return core.panic(ERR_NO_WEBHOOK_ID);
 			}
 			const params = {
 				method: 'delete',
@@ -113,7 +116,7 @@
 
 		function createWebhook(webhookModel) {
 			if (!core.isNonEmptyObject(webhookModel)) {
-				return core.panic('No valid webhookModel provided');
+				return core.panic(ERR_NO_WEBHOOK_MODEL);
 			}
 			const params = {
 				method: 'post',

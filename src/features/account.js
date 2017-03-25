@@ -2,6 +2,10 @@
 (function (glomeApiService) {
 	'use strict';
 
+	const ERR_NO_PUBLIC_DATA = 'No valid publicData provided';
+	const ERR_NO_LINK_ID = 'No valid linkId provided';
+	const ERR_NO_LIFETIME = 'No valid lifetimeMinutes provided';
+
 	glomeApiService.account = account();
 
 	function account() {
@@ -20,7 +24,7 @@
 
 		function setPublicData(publicData) {
 			if (!core.isNonEmptyObject(publicData)) {
-				return core.panic('No valid publicData provided');
+				return core.panic(ERR_NO_PUBLIC_DATA);
 			}
 			const params = {
 				method: 'post',
@@ -48,7 +52,7 @@
 
 		function createLinkedAccount(linkId) {
 			if (!core.isNonEmptyString(linkId)) {
-				return core.panic('No valid linkId provided');
+				return core.panic(ERR_NO_LINK_ID);
 			}
 			const params = {
 				method: 'post',
@@ -66,7 +70,7 @@
 
 		function createLinkingToken(lifetimeMinutes) {
 			if (!core.isNumber(lifetimeMinutes)) {
-				return core.panic('No valid lifetimeMinutes provided');
+				return core.panic(ERR_NO_LIFETIME);
 			}
 			const params = {
 				method: 'get',

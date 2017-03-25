@@ -2,6 +2,9 @@
 (function (glomeApiService) {
 	'use strict';
 
+	const ERR_NO_USER_ID = 'No valid userId provided';
+	const ERR_NO_APP_DATA = 'No valid appData provided';
+
 	glomeApiService.user = user();
 
 	function user() {
@@ -17,10 +20,10 @@
 
 		function setAppData(userId, appData) {
 			if (!core.isNonEmptyString(userId)) {
-				return core.panic('No valid userId provided');
+				return core.panic(ERR_NO_USER_ID);
 			}
 			if (!core.isNonEmptyObject(appData)) {
-				return core.panic('No valid appData provided');
+				return core.panic(ERR_NO_APP_DATA);
 			}
 			const params = {
 				method: 'post', // `put` in the example from the doc
@@ -39,7 +42,7 @@
 
 		function getUser(userId) {
 			if (!core.isNonEmptyString(userId)) {
-				return core.panic('No valid userId provided');
+				return core.panic(ERR_NO_USER_ID);
 			}
 			const params = {
 				method: 'get',
