@@ -41,4 +41,5 @@ update-demo:
 
 # https://github.com/emcrisostomo/fswatch
 watch:
+	make build
 	fswatch ${FILES} | xargs -n1 sh -c 'make update-demo'
