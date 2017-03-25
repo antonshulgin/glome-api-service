@@ -21,8 +21,32 @@
 		externals.getAuthToken = getAuthToken;
 		externals.setAuthToken = setAuthToken;
 		externals.produceRequest = produceRequest;
+		externals.applyUrlParams = applyUrlParams;
 
 		return externals;
+
+		function applyUrlParams(urlTemplate, urlParams) {
+			if (!isNonEmptyString(urlTemplate)) {
+				return panic('No urlTemplate provided');
+			}
+			if (!isNonEmptyObject(urlParams)) {
+				return panic('No urlParams provided');
+			}
+			Object.keys(urlParams).sort(sortLongestFirst).forEach(applyParam);
+			return urlTemplate;
+
+			function applyParam(urlParam) {
+				var patternString = new RegExp('\:' + urlParam, 'gi');
+				urlTemplate = urlTemplate.replace(
+					patternString,
+					encodeURIComponent(urlParams[urlParam])
+				);
+			}
+
+			function sortLongestFirst(a, b) {
+				return a.length < b.length;
+			}
+		}
 
 		function produceRequest(params) {
 			const baseUrl = getBaseUrl();
