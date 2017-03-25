@@ -31,7 +31,11 @@
 			}
 			const params = {
 				method: 'patch',
-				path: '/' + encodeURIComponent(schemaName) + '/' + encodeURIComponent(objectId),
+				path: '/:schemaName/:objectId',
+				pathParams: {
+					schemaName: schemaName,
+					objectId: objectId
+				},
 				includeHeaders: {
 					authToken: true,
 					appId: true
@@ -53,7 +57,11 @@
 			}
 			const params = {
 				method: 'put',
-				path: '/' + encodeURIComponent(schemaName) + '/' + encodeURIComponent(objectId),
+				path: '/:schemaName/:objectId',
+				pathParams: {
+					schemaName: schemaName,
+					objectId: objectId
+				},
 				includeHeaders: {
 					authToken: true,
 					appId: true
@@ -69,7 +77,10 @@
 			}
 			const params = {
 				method: 'get',
-				path: '/' + encodeURIComponent(schemaName),
+				path: '/:schemaName',
+				pathParams: {
+					schemaName: schemaName
+				},
 				includeHeaders: {
 					authToken: true,
 					appId: true
@@ -87,7 +98,11 @@
 			}
 			const params = {
 				method: 'get',
-				path: '/' + encodeURIComponent(schemaName) + '/' + encodeURIComponent(objectId),
+				path: '/:schemaName/:objectId',
+				pathParams: {
+					schemaName: schemaName,
+					objectId: objectId
+				},
 				includeHeaders: {
 					authToken: true,
 					appId: true
@@ -105,7 +120,11 @@
 			}
 			const params = {
 				method: 'delete',
-				path: '/' + encodeURIComponent(schemaName) + '/' + encodeURIComponent(objectId),
+				path: '/:schemaName/:objectId',
+				pathParams: {
+					schemaName: schemaName,
+					objectId: objectId
+				},
 				includeHeaders: {
 					authToken: true,
 					appId: true
@@ -123,7 +142,10 @@
 			}
 			const params = {
 				method: 'post',
-				path: '/' + encodeURIComponent(schemaName),
+				path: '/:schemaName',
+				pathParams: {
+					schemaName: schemaName
+				},
 				includeHeaders: {
 					authToken: true,
 					appId: true

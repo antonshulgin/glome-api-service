@@ -28,7 +28,10 @@
 			}
 			const params = {
 				method: 'patch',
-				path: '/webhooks/' + encodeURIComponent(webhookId),
+				path: '/webhooks/:webhookId',
+				pathParams: {
+					webhookId: webhookId
+				},
 				includeHeaders: {
 					appId: true,
 					appSecret: true
@@ -47,7 +50,10 @@
 			}
 			const params = {
 				method: 'put',
-				path: '/webhooks/' + encodeURIComponent(webhookId),
+				path: '/webhooks/:webhookId',
+				pathParams: {
+					webhookId: webhookId
+				},
 				includeHeaders: {
 					appId: true,
 					appSecret: true
@@ -75,7 +81,10 @@
 			}
 			const params = {
 				method: 'get',
-				path: '/webhooks/' + encodeURIComponent(webhookId),
+				path: '/webhooks/:webhookId',
+				pathParams: {
+					webhookId: webhookId
+				},
 				includeHeaders: {
 					appId: true,
 					appSecret: true
@@ -90,7 +99,10 @@
 			}
 			const params = {
 				method: 'delete',
-				path: '/webhooks/' + encodeURIComponent(webhookId),
+				path: '/webhooks/:webhookId',
+				pathParams: {
+					webhookId: webhookId
+				},
 				includeHeaders: {
 					appId: true,
 					appSecret: true

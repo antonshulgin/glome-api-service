@@ -28,7 +28,10 @@
 			}
 			const params = {
 				method: 'patch',
-				path: '/schemas/' + encodeURIComponent(schemaName) + '/acl',
+				path: '/schemas/:schemaName/acl',
+				pathParams: {
+					schemaName: schemaName
+				},
 				includeHeaders: {
 					appId: true,
 					appSecret: true
@@ -50,7 +53,11 @@
 			}
 			const params = {
 				method: 'patch',
-				path: '/schemas/' + encodeURIComponent(schemaName) + '/' + encodeURIComponent(socialObjectId) + '/acl',
+				path: '/schemas/:schemaName/:socialObjectId/acl',
+				pathParams: {
+					schemaName: schemaName,
+					socialObjectId: socialObjectId
+				},
 				includeHeaders: {
 					appId: true,
 					appSecret: true
@@ -69,7 +76,10 @@
 			}
 			const params = {
 				method: 'put',
-				path: '/schemas/' + encodeURIComponent(schemaName),
+				path: '/schemas/:schemaName',
+				pathParams: {
+					schemaName: schemaName
+				},
 				includeHeaders: {
 					appId: true,
 					appSecret: true
@@ -91,7 +101,11 @@
 			}
 			const params = {
 				method: 'put',
-				path: '/schemas/' + encodeURIComponent(schemaName) + '/' + encodeURIComponent(socialObjectId),
+				path: '/schemas/:schemaName/:socialObjectId',
+				pathParams: {
+					schemaName: schemaName,
+					socialObjectId: socialObjectId
+				},
 				includeHeaders: {
 					appId: true,
 					appSecret: true
@@ -107,7 +121,10 @@
 			}
 			const params = {
 				method: 'get',
-				path: '/schemas/' + encodeURIComponent(schemaName) + '/acl',
+				path: '/schemas/:schemaName/acl',
+				pathParams: {
+					schemaName: schemaName
+				},
 				includeHeaders: {
 					appId: true,
 					appSecret: true
@@ -125,7 +142,11 @@
 			}
 			const params = {
 				method: 'get',
-				path: '/schemas/' + encodeURIComponent(schemaName) + '/' + encodeURIComponent('socialObjectId') + '/acl',
+				path: '/schemas/:schemaName/:socialObjectId/acl',
+				pathParams: {
+					schemaName: schemaName,
+					socialObjectId: socialObjectId
+				},
 				includeHeaders: {
 					appId: true,
 					appSecret: true

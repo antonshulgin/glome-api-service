@@ -24,7 +24,10 @@
 			}
 			const params = {
 				method: 'post', // `put` in the example from the doc
-				path: '/user/' + encodeURIComponent(userId) + '/data',
+				path: '/user/:userId/data',
+				pathParams: {
+					userId: userId
+				},
 				includeHeaders: {
 					appId: true,
 					appSecret: true
@@ -40,7 +43,10 @@
 			}
 			const params = {
 				method: 'get',
-				path: '/user/' + encodeURIComponent(userId),
+				path: '/user/:userId',
+				pathParams: {
+					userId: userId
+				},
 				includeHeaders: {
 					appId: true,
 					appSecret: true

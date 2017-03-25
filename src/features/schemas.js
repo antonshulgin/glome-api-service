@@ -28,7 +28,10 @@
 			}
 			const params = {
 				method: 'patch',
-				path: '/schemas/' + encodeURIComponent(schemaName),
+				path: '/schemas/:schemaName',
+				pathParams: {
+					schemaName: schemaName
+				},
 				includeHeaders: {
 					appId: true,
 					appSecret: true
@@ -47,7 +50,10 @@
 			}
 			const params = {
 				method: 'put',
-				path: '/schemas/' + encodeURIComponent(schemaName),
+				path: '/schemas/:schemaName',
+				pathParams: {
+					schemaName: schemaName
+				},
 				includeHeaders: {
 					appId: true,
 					appSecret: true
@@ -75,7 +81,10 @@
 			}
 			const params = {
 				method: 'get',
-				path: '/schemas/' + encodeURIComponent(schemaName),
+				path: '/schemas/:schemaName',
+				pathParams: {
+					schemaName: schemaName
+				},
 				includeHeaders: {
 					appId: true,
 					appSecret: true
@@ -90,7 +99,10 @@
 			}
 			const params = {
 				method: 'delete',
-				path: '/schemas/' + encodeURIComponent(schemaName),
+				path: '/schemas/:schemaName',
+				pathParams: {
+					schemaName: schemaName
+				},
 				includeHeaders: {
 					appId: true,
 					appSecret: true
