@@ -2,17 +2,20 @@
 (function (glomeApiService) {
 	'use strict';
 
-	const ERR_NO_PUBLIC_DATA = 'No valid publicData provided';
-	const ERR_NO_LINK_ID = 'No valid linkId provided';
-	const ERR_NO_LIFETIME = 'No valid lifetimeMinutes provided';
-
 	glomeApiService.account = account();
 
 	function account() {
-		//const internals = {};
-		const externals = {};
+		const ERR_NO_PUBLIC_DATA = 'No valid publicData provided';
+		const ERR_NO_LINK_ID = 'No valid linkId provided';
+		const ERR_NO_LIFETIME = 'No valid lifetimeMinutes provided';
 
-		const core = glomeApiService.core;
+		const panic = glomeApiService.core.panic;
+		const isNonEmptyString = glomeApiService.core.isNonEmptyString;
+		const isNonEmptyObject = glomeApiService.core.isNonEmptyObject;
+		const isNumber = glomeApiService.core.isNumber;
+		const produceRequest = glomeApiService.core.produceRequest;
+
+		const externals = {};
 
 		externals.createAccount = createAccount;
 		externals.createLinkingToken = createLinkingToken;
@@ -23,10 +26,8 @@
 		return externals;
 
 		function setPublicData(publicData) {
-			if (!core.isNonEmptyObject(publicData)) {
-				return core.panic(ERR_NO_PUBLIC_DATA);
-			}
-			const params = {
+			if (!isNonEmptyObject(publicData)) { return panic(ERR_NO_PUBLIC_DATA); }
+			return produceRequest({
 				method: 'post',
 				path: '/account/data',
 				includeHeaders: {
@@ -34,27 +35,23 @@
 					appId: true
 				},
 				data: publicData
-			};
-			return core.produceRequest(params);
+			});
 		}
 
 		function getAccount() {
-			const params = {
+			return produceRequest({
 				method: 'get',
 				path: '/account',
 				includeHeaders: {
 					authToken: true,
 					appId: true
 				}
-			};
-			return core.produceRequest(params);
+			});
 		}
 
 		function createLinkedAccount(linkId) {
-			if (!core.isNonEmptyString(linkId)) {
-				return core.panic(ERR_NO_LINK_ID);
-			}
-			const params = {
+			if (!isNonEmptyString(linkId)) { return panic(ERR_NO_LINK_ID); }
+			return produceRequest({
 				method: 'post',
 				path: '/account/link',
 				contentType: 'application/json',
@@ -64,15 +61,12 @@
 				data: {
 					linkId: linkId
 				}
-			};
-			return core.produceRequest(params);
+			});
 		}
 
 		function createLinkingToken(lifetimeMinutes) {
-			if (!core.isNumber(lifetimeMinutes)) {
-				return core.panic(ERR_NO_LIFETIME);
-			}
-			const params = {
+			if (!isNumber(lifetimeMinutes)) { return panic(ERR_NO_LIFETIME); }
+			return produceRequest({
 				method: 'get',
 				path: '/account/link?validfor=:lifetimeMinutes',
 				pathParams: {
@@ -82,19 +76,17 @@
 					appId: true,
 					authToken: true
 				}
-			};
-			return core.produceRequest(params);
+			});
 		}
 
 		function createAccount() {
-			const params = {
+			return produceRequest({
 				method: 'post',
 				path: '/account',
 				includeHeaders: {
 					appId: true
 				}
-			};
-			return core.produceRequest(params);
+			});
 		}
 
 	}

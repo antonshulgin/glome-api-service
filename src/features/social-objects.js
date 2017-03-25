@@ -2,17 +2,19 @@
 (function (glomeApiService) {
 	'use strict';
 
-	const ERR_NO_SCHEMA_NAME = 'No valid schemaName provided';
-	const ERR_NO_OBJECT_ID = 'No valid objectId provided';
-	const ERR_NO_OBJECT_MODEL = 'No valid objectModel provided';
-
 	glomeApiService.socialObjects = socialObjects();
 
 	function socialObjects() {
-		//const internals = {};
-		const externals = {};
+		const ERR_NO_SCHEMA_NAME = 'No valid schemaName provided';
+		const ERR_NO_OBJECT_ID = 'No valid objectId provided';
+		const ERR_NO_OBJECT_MODEL = 'No valid objectModel provided';
 
-		const core = glomeApiService.core;
+		const panic = glomeApiService.core.panic;
+		const isNonEmptyString = glomeApiService.core.isNonEmptyString;
+		const isNonEmptyObject = glomeApiService.core.isNonEmptyObject;
+		const produceRequest = glomeApiService.core.produceRequest;
+
+		const externals = {};
 
 		externals.createSocialObject = createSocialObject;
 		externals.deleteSocialObject = deleteSocialObject;
@@ -24,16 +26,10 @@
 		return externals;
 
 		function updateSocialObject(schemaName, objectId, objectModel) {
-			if (!core.isNonEmptyString(schemaName)) {
-				return core.panic(ERR_NO_SCHEMA_NAME);
-			}
-			if (!core.isNonEmptyString(objectId)) {
-				return core.panic(ERR_NO_OBJECT_ID);
-			}
-			if (!core.isNonEmptyObject(objectModel)) {
-				return core.panic(ERR_NO_OBJECT_MODEL);
-			}
-			const params = {
+			if (!isNonEmptyString(schemaName)) { return panic(ERR_NO_SCHEMA_NAME); }
+			if (!isNonEmptyString(objectId)) { return panic(ERR_NO_OBJECT_ID); }
+			if (!isNonEmptyObject(objectModel)) { return panic(ERR_NO_OBJECT_MODEL); }
+			return produceRequest({
 				method: 'patch',
 				path: '/:schemaName/:objectId',
 				pathParams: {
@@ -45,21 +41,14 @@
 					appId: true
 				},
 				data: objectModel
-			};
-			return core.produceRequest(params);
+			});
 		}
 
 		function replaceSocialObject(schemaName, objectId, objectModel) {
-			if (!core.isNonEmptyString(schemaName)) {
-				return core.panic(ERR_NO_SCHEMA_NAME);
-			}
-			if (!core.isNonEmptyString(objectId)) {
-				return core.panic(ERR_NO_OBJECT_ID);
-			}
-			if (!core.isNonEmptyObject(objectModel)) {
-				return core.panic(ERR_NO_OBJECT_MODEL);
-			}
-			const params = {
+			if (!isNonEmptyString(schemaName)) { return panic(ERR_NO_SCHEMA_NAME); }
+			if (!isNonEmptyString(objectId)) { return panic(ERR_NO_OBJECT_ID); }
+			if (!isNonEmptyObject(objectModel)) { return panic(ERR_NO_OBJECT_MODEL); }
+			return produceRequest({
 				method: 'put',
 				path: '/:schemaName/:objectId',
 				pathParams: {
@@ -71,15 +60,12 @@
 					appId: true
 				},
 				data: objectModel
-			};
-			return core.produceRequest(params);
+			});
 		}
 
 		function listSocialObjects(schemaName) {
-			if (!core.isNonEmptyString(schemaName)) {
-				return core.panic(ERR_NO_SCHEMA_NAME);
-			}
-			const params = {
+			if (!isNonEmptyString(schemaName)) { return panic(ERR_NO_SCHEMA_NAME); }
+			return produceRequest({
 				method: 'get',
 				path: '/:schemaName',
 				pathParams: {
@@ -89,18 +75,13 @@
 					authToken: true,
 					appId: true
 				}
-			};
-			return core.produceRequest(params);
+			});
 		}
 
 		function getSocialObject(schemaName, objectId) {
-			if (!core.isNonEmptyString(schemaName)) {
-				return core.panic(ERR_NO_SCHEMA_NAME);
-			}
-			if (!core.isNonEmptyString(objectId)) {
-				return core.panic(ERR_NO_OBJECT_ID);
-			}
-			const params = {
+			if (!isNonEmptyString(schemaName)) { return panic(ERR_NO_SCHEMA_NAME); }
+			if (!isNonEmptyString(objectId)) { return panic(ERR_NO_OBJECT_ID); }
+			return produceRequest({
 				method: 'get',
 				path: '/:schemaName/:objectId',
 				pathParams: {
@@ -111,18 +92,13 @@
 					authToken: true,
 					appId: true
 				}
-			};
-			return core.produceRequest(params);
+			});
 		}
 
 		function deleteSocialObject(schemaName, objectId) {
-			if (!core.isNonEmptyString(schemaName)) {
-				return core.panic(ERR_NO_SCHEMA_NAME);
-			}
-			if (!core.isNonEmptyString(objectId)) {
-				return core.panic(ERR_NO_OBJECT_ID);
-			}
-			const params = {
+			if (!isNonEmptyString(schemaName)) { return panic(ERR_NO_SCHEMA_NAME); }
+			if (!isNonEmptyString(objectId)) { return panic(ERR_NO_OBJECT_ID); }
+			return produceRequest({
 				method: 'delete',
 				path: '/:schemaName/:objectId',
 				pathParams: {
@@ -133,18 +109,13 @@
 					authToken: true,
 					appId: true
 				}
-			};
-			return core.produceRequest(params);
+			});
 		}
 
 		function createSocialObject(schemaName, objectModel) {
-			if (!core.isNonEmptyString(schemaName)) {
-				return core.panic(ERR_NO_SCHEMA_NAME);
-			}
-			if (!core.isNonEmptyObject(objectModel)) {
-				return core.panic(ERR_NO_OBJECT_MODEL);
-			}
-			const params = {
+			if (!isNonEmptyString(schemaName)) { return panic(ERR_NO_SCHEMA_NAME); }
+			if (!isNonEmptyObject(objectModel)) { return panic(ERR_NO_OBJECT_MODEL); }
+			return produceRequest({
 				method: 'post',
 				path: '/:schemaName',
 				pathParams: {
@@ -155,8 +126,7 @@
 					appId: true
 				},
 				data: objectModel
-			};
-			return core.produceRequest(params);
+			});
 		}
 	}
 

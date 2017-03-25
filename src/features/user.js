@@ -2,16 +2,18 @@
 (function (glomeApiService) {
 	'use strict';
 
-	const ERR_NO_USER_ID = 'No valid userId provided';
-	const ERR_NO_APP_DATA = 'No valid appData provided';
-
 	glomeApiService.user = user();
 
 	function user() {
-		//const internals = {};
-		const externals = {};
+		const ERR_NO_USER_ID = 'No valid userId provided';
+		const ERR_NO_APP_DATA = 'No valid appData provided';
 
-		const core = glomeApiService.core;
+		const panic = glomeApiService.core.panic;
+		const isNonEmptyString = glomeApiService.core.isNonEmptyString;
+		const isNonEmptyObject = glomeApiService.core.isNonEmptyObject;
+		const produceRequest = glomeApiService.core.produceRequest;
+
+		const externals = {};
 
 		externals.getUser = getUser;
 		externals.setAppData = setAppData;
@@ -19,13 +21,9 @@
 		return externals;
 
 		function setAppData(userId, appData) {
-			if (!core.isNonEmptyString(userId)) {
-				return core.panic(ERR_NO_USER_ID);
-			}
-			if (!core.isNonEmptyObject(appData)) {
-				return core.panic(ERR_NO_APP_DATA);
-			}
-			const params = {
+			if (!isNonEmptyString(userId)) { return panic(ERR_NO_USER_ID); }
+			if (!isNonEmptyObject(appData)) { return panic(ERR_NO_APP_DATA); }
+			return produceRequest({
 				method: 'post', // `put` in the example from the doc
 				path: '/user/:userId/data',
 				pathParams: {
@@ -36,15 +34,12 @@
 					appSecret: true
 				},
 				data: appData
-			};
-			return core.produceRequest(params);
+			});
 		}
 
 		function getUser(userId) {
-			if (!core.isNonEmptyString(userId)) {
-				return core.panic(ERR_NO_USER_ID);
-			}
-			const params = {
+			if (!isNonEmptyString(userId)) { return panic(ERR_NO_USER_ID); }
+			return produceRequest({
 				method: 'get',
 				path: '/user/:userId',
 				pathParams: {
@@ -54,8 +49,7 @@
 					appId: true,
 					appSecret: true
 				}
-			};
-			return core.produceRequest(params);
+			});
 		}
 	}
 

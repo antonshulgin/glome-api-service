@@ -2,16 +2,18 @@
 (function (glomeApiService) {
 	'use strict';
 
-	const ERR_NO_WEBHOOK_ID = 'No valid webhookId provided';
-	const ERR_NO_WEBHOOK_MODEL = 'No valid webhookModel provided';
-
 	glomeApiService.webhooks = webhooks();
 
 	function webhooks() {
-		//const internals = {};
-		const externals = {};
+		const ERR_NO_WEBHOOK_ID = 'No valid webhookId provided';
+		const ERR_NO_WEBHOOK_MODEL = 'No valid webhookModel provided';
 
-		const core = glomeApiService.core;
+		const panic = glomeApiService.core.panic;
+		const isNonEmptyString = glomeApiService.core.isNonEmptyString;
+		const isNonEmptyObject = glomeApiService.core.isNonEmptyObject;
+		const produceRequest = glomeApiService.core.produceRequest;
+
+		const externals = {};
 
 		externals.createWebhook = createWebhook;
 		externals.deleteWebhook = deleteWebhook;
@@ -23,13 +25,9 @@
 		return externals;
 
 		function updateWebhook(webhookId, webhookModel) {
-			if (!core.isNonEmptyString(webhookId)) {
-				return core.panic(ERR_NO_WEBHOOK_ID);
-			}
-			if (!core.isNonEmptyObject(webhookModel)) {
-				return core.panic(ERR_NO_WEBHOOK_MODEL);
-			}
-			const params = {
+			if (!isNonEmptyString(webhookId)) { return panic(ERR_NO_WEBHOOK_ID); }
+			if (!isNonEmptyObject(webhookModel)) { return panic(ERR_NO_WEBHOOK_MODEL); }
+			return produceRequest({
 				method: 'patch',
 				path: '/webhooks/:webhookId',
 				pathParams: {
@@ -40,18 +38,13 @@
 					appSecret: true
 				},
 				data: webhookModel
-			};
-			return core.produceRequest(params);
+			});
 		}
 
 		function replaceWebhook(webhookId, webhookModel) {
-			if (!core.isNonEmptyString(webhookId)) {
-				return core.panic(ERR_NO_WEBHOOK_ID);
-			}
-			if (!core.isNonEmptyObject(webhookModel)) {
-				return core.panic(ERR_NO_WEBHOOK_MODEL);
-			}
-			const params = {
+			if (!isNonEmptyString(webhookId)) { return panic(ERR_NO_WEBHOOK_ID); }
+			if (!isNonEmptyObject(webhookModel)) { return panic(ERR_NO_WEBHOOK_MODEL); }
+			return produceRequest({
 				method: 'put',
 				path: '/webhooks/:webhookId',
 				pathParams: {
@@ -62,27 +55,23 @@
 					appSecret: true
 				},
 				data: webhookModel
-			};
-			return core.produceRequest(params);
+			});
 		}
 
 		function listWebhooks() {
-			const params = {
+			return produceRequest({
 				method: 'get',
 				path: '/webhooks',
 				includeHeaders: {
 					appId: true,
 					appSecret: true
 				}
-			};
-			return core.produceRequest(params);
+			});
 		}
 
 		function getWebhook(webhookId) {
-			if (!core.isNonEmptyString(webhookId)) {
-				return core.panic(ERR_NO_WEBHOOK_ID);
-			}
-			const params = {
+			if (!isNonEmptyString(webhookId)) { return panic(ERR_NO_WEBHOOK_ID); }
+			return produceRequest({
 				method: 'get',
 				path: '/webhooks/:webhookId',
 				pathParams: {
@@ -92,15 +81,12 @@
 					appId: true,
 					appSecret: true
 				}
-			};
-			return core.produceRequest(params);
+			});
 		}
 
 		function deleteWebhook(webhookId) {
-			if (!core.isNonEmptyString(webhookId)) {
-				return core.panic(ERR_NO_WEBHOOK_ID);
-			}
-			const params = {
+			if (!isNonEmptyString(webhookId)) { return panic(ERR_NO_WEBHOOK_ID); }
+			return produceRequest({
 				method: 'delete',
 				path: '/webhooks/:webhookId',
 				pathParams: {
@@ -110,15 +96,12 @@
 					appId: true,
 					appSecret: true
 				}
-			};
-			return core.produceRequest(params);
+			});
 		}
 
 		function createWebhook(webhookModel) {
-			if (!core.isNonEmptyObject(webhookModel)) {
-				return core.panic(ERR_NO_WEBHOOK_MODEL);
-			}
-			const params = {
+			if (!isNonEmptyObject(webhookModel)) { return panic(ERR_NO_WEBHOOK_MODEL); }
+			return produceRequest({
 				method: 'post',
 				path: '/webhooks',
 				includeHeaders: {
@@ -126,8 +109,7 @@
 					appSecret: true
 				},
 				data: webhookModel
-			};
-			return core.produceRequest(params);
+			});
 		}
 	}
 

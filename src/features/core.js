@@ -2,19 +2,19 @@
 (function (glomeApiService) {
 	'use strict';
 
-	const ERR_NO_PATH_TEMPLATE = 'No valid pathTemplate provided';
-	const ERR_NO_PATH_PARAMS = 'No valid pathParams provided';
-	const ERR_NO_BASE_URL = 'No valid baseUrl provided';
-	const ERR_NO_PARAMS = 'No valid params provided';
-	const ERR_NO_METHOD = 'No valid method provided';
-	const ERR_NO_PATH = 'No valid path provided';
-	const ERR_NO_AUTH_TOKEN = 'No authToken provided';
-	const ERR_NO_APP_SECRET = 'No valid appSecret provided';
-	const ERR_NO_APP_ID = 'No valid appId provided';
-
 	glomeApiService.core = core();
 
 	function core() {
+		const ERR_NO_PATH_TEMPLATE = 'No valid pathTemplate provided';
+		const ERR_NO_PATH_PARAMS = 'No valid pathParams provided';
+		const ERR_NO_BASE_URL = 'No valid baseUrl provided';
+		const ERR_NO_PARAMS = 'No valid params provided';
+		const ERR_NO_METHOD = 'No valid method provided';
+		const ERR_NO_PATH = 'No valid path provided';
+		const ERR_NO_AUTH_TOKEN = 'No authToken provided';
+		const ERR_NO_APP_SECRET = 'No valid appSecret provided';
+		const ERR_NO_APP_ID = 'No valid appId provided';
+
 		const internals = {};
 		const externals = {};
 
@@ -35,12 +35,8 @@
 		return externals;
 
 		function applyPathParams(pathTemplate, pathParams) {
-			if (!isNonEmptyString(pathTemplate)) {
-				return panic(ERR_NO_PATH_TEMPLATE);
-			}
-			if (!isNonEmptyObject(pathParams)) {
-				return panic(ERR_NO_PATH_PARAMS);
-			}
+			if (!isNonEmptyString(pathTemplate)) { return panic(ERR_NO_PATH_TEMPLATE); }
+			if (!isNonEmptyObject(pathParams)) { return panic(ERR_NO_PATH_PARAMS); }
 			Object.keys(pathParams)
 				.sort(sortLongestFirst)
 				.forEach(applyPathParam);
@@ -61,18 +57,10 @@
 
 		function produceRequest(params) {
 			const baseUrl = getBaseUrl();
-			if (!baseUrl) {
-				return panic(ERR_NO_BASE_URL);
-			}
-			if (!isNonEmptyObject(params)) {
-				return panic(ERR_NO_PARAMS);
-			}
-			if (!isNonEmptyString(params.method)) {
-				return panic(ERR_NO_METHOD);
-			}
-			if (!isNonEmptyString(params.path)) {
-				return panic(ERR_NO_PATH);
-			}
+			if (!baseUrl) { return panic(ERR_NO_BASE_URL); }
+			if (!isNonEmptyObject(params)) { return panic(ERR_NO_PARAMS); }
+			if (!isNonEmptyString(params.method)) { return panic(ERR_NO_METHOD); }
+			if (!isNonEmptyString(params.path)) { return panic(ERR_NO_PATH); }
 			if (isNonEmptyObject(params.pathParams)) {
 				params.path = applyPathParams(params.path, params.pathParams);
 			}
@@ -133,9 +121,7 @@
 		}
 
 		function setBaseUrl(baseUrl) {
-			if (!isNonEmptyString(baseUrl)) {
-				return panic(ERR_NO_BASE_URL);
-			}
+			if (!isNonEmptyString(baseUrl)) { return panic(ERR_NO_BASE_URL); }
 			internals.baseUrl = baseUrl.replace(/\/*$/, '');
 			return getBaseUrl();
 		}
@@ -145,9 +131,7 @@
 		}
 
 		function setAppSecret(appSecret) {
-			if (!isNonEmptyString(appSecret)) {
-				return panic(ERR_NO_APP_SECRET);
-			}
+			if (!isNonEmptyString(appSecret)) { return panic(ERR_NO_APP_SECRET); }
 			internals.appSecret = appSecret;
 			return getAppSecret();
 		}
@@ -157,9 +141,7 @@
 		}
 
 		function setAppId(appId) {
-			if (!isNonEmptyString(appId)) {
-				return panic(ERR_NO_APP_ID);
-			}
+			if (!isNonEmptyString(appId)) { return panic(ERR_NO_APP_ID); }
 			internals.appId = appId;
 			return getAppId();
 		}
