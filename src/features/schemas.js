@@ -9,7 +9,6 @@
 		const externals = {};
 
 		const core = glomeApiService.core;
-		const util = glomeApiService.util;
 
 		externals.createSchema = createSchema;
 		externals.deleteSchema = deleteSchema;
@@ -21,10 +20,10 @@
 		return externals;
 
 		function updateFields(schemaName, schemaFields) {
-			if (!util.isNonEmptyString(schemaName)) {
+			if (!core.isNonEmptyString(schemaName)) {
 				return core.panic('No valid schemaName provided');
 			}
-			if (!util.isNonEmptyObject(schemaFields)) {
+			if (!core.isNonEmptyObject(schemaFields)) {
 				return core.panic('No valid schemaFields provided');
 			}
 			const params = {
@@ -40,10 +39,10 @@
 		}
 
 		function replaceSchema(schemaName, schemaModel) {
-			if (!util.isNonEmptyString(schemaName)) {
+			if (!core.isNonEmptyString(schemaName)) {
 				return core.panic('No valid schemaName provided');
 			}
-			if (!util.isNonEmptyObject(schemaModel)) {
+			if (!core.isNonEmptyObject(schemaModel)) {
 				return core.panic('No valid schemaModel provided');
 			}
 			const params = {
@@ -71,7 +70,7 @@
 		}
 
 		function getSchema(schemaName) {
-			if (!util.isNonEmptyString(schemaName)) {
+			if (!core.isNonEmptyString(schemaName)) {
 				return core.panic('No valid schemaName provided');
 			}
 			const params = {
@@ -86,7 +85,7 @@
 		}
 
 		function deleteSchema(schemaName) {
-			if (!util.isNonEmptyString(schemaName)) {
+			if (!core.isNonEmptyString(schemaName)) {
 				return core.panic('No valid schemaName provided');
 			}
 			const params = {
@@ -101,7 +100,7 @@
 		}
 
 		function createSchema(schemaModel) {
-			if (!util.isNonEmptyObject(schemaModel)) {
+			if (!core.isNonEmptyObject(schemaModel)) {
 				return core.panic('No valid schemaModel provided');
 			}
 			const params = {

@@ -8,9 +8,10 @@
 		const internals = {};
 		const externals = {};
 
-		const util = glomeApiService.util;
-
 		externals.panic = panic;
+		externals.isNonEmptyString = isNonEmptyString;
+		externals.isNonEmptyObject = isNonEmptyObject;
+		externals.isNumber = isNumber;
 		externals.getAppId = getAppId;
 		externals.setAppId = setAppId;
 		externals.getAppSecret = getAppSecret;
@@ -28,13 +29,13 @@
 			if (!baseUrl) {
 				return panic('baseUrl is missing');
 			}
-			if (!util.isNonEmptyObject(params)) {
+			if (!isNonEmptyObject(params)) {
 				return panic('No params provided');
 			}
-			if (!util.isNonEmptyString(params.method)) {
+			if (!isNonEmptyString(params.method)) {
 				return panic('No method provided');
 			}
-			if (!util.isNonEmptyString(params.path)) {
+			if (!isNonEmptyString(params.path)) {
 				return panic('No path provided');
 			}
 			return new Promise(promiseProduceRequest);
@@ -45,7 +46,7 @@
 				request.addEventListener('load', onLoad, false);
 				request.addEventListener('error', onError, false);
 				request.open(params.method.toUpperCase(), url, true);
-				if (util.isNonEmptyObject(params.includeHeaders)) {
+				if (isNonEmptyObject(params.includeHeaders)) {
 					if (params.includeHeaders.authToken) {
 						request.setRequestHeader('Authorization', getAuthToken());
 					}
@@ -55,11 +56,11 @@
 					if (params.includeHeaders.appSecret) {
 						request.setRequestHeader('X-Glome-Application-Secret', getAppSecret());
 					}
-					if (util.isNonEmptyString(params.contentType)) {
+					if (isNonEmptyString(params.contentType)) {
 						request.setRequestHeader('Content-Type', params.contentType);
 					}
 				}
-				if (util.isNonEmptyObject(params.data)) {
+				if (isNonEmptyObject(params.data)) {
 					request.send(params.data);
 				} else {
 					request.send();
@@ -82,7 +83,7 @@
 		}
 
 		function setAuthToken(authToken) {
-			if (!util.isNonEmptyString(authToken)) {
+			if (!isNonEmptyString(authToken)) {
 				return panic('Failed to set authToken: `' + authToken + '`');
 			}
 			internals.authToken = authToken;
@@ -94,7 +95,7 @@
 		}
 
 		function setBaseUrl(baseUrl) {
-			if (!util.isNonEmptyString(baseUrl)) {
+			if (!isNonEmptyString(baseUrl)) {
 				return panic('Failed to set baseUrl: `' + baseUrl + '`');
 			}
 			internals.baseUrl = baseUrl.replace(/\/*$/, '');
@@ -106,7 +107,7 @@
 		}
 
 		function setAppSecret(appSecret) {
-			if (!util.isNonEmptyString(appSecret)) {
+			if (!isNonEmptyString(appSecret)) {
 				return panic('Failed to set appSecret: `' + appSecret + '`');
 			}
 			internals.appSecret = appSecret;
@@ -118,11 +119,30 @@
 		}
 
 		function setAppId(appId) {
-			if (!util.isNonEmptyString(appId)) {
+			if (!isNonEmptyString(appId)) {
 				return panic('Failed to set appId: `' + appId + '`');
 			}
 			internals.appId = appId;
 			return getAppId();
+		}
+
+		function isNumber(item) {
+			return (toStringCall(item) === '[object Number]') &&
+				isFinite(item);
+		}
+
+		function isNonEmptyObject(item) {
+			return (toStringCall(item) === '[object Object]') &&
+				(Object.keys(item).length > 0);
+		}
+
+		function isNonEmptyString(item) {
+			return (toStringCall(item) === '[object String]') &&
+				(item.length > 0);
+		}
+
+		function toStringCall(item) {
+			return Object.prototype.toString.call(item);
 		}
 
 		function panic(reason) {

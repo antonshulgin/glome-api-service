@@ -9,7 +9,6 @@
 		const externals = {};
 
 		const core = glomeApiService.core;
-		const util = glomeApiService.util;
 
 		externals.getUser = getUser;
 		externals.setAppData = setAppData;
@@ -17,10 +16,10 @@
 		return externals;
 
 		function setAppData(userId, appData) {
-			if (!util.isNonEmptyString(userId)) {
+			if (!core.isNonEmptyString(userId)) {
 				return core.panic('No valid userId provided');
 			}
-			if (!util.isNonEmptyObject(appData)) {
+			if (!core.isNonEmptyObject(appData)) {
 				return core.panic('No valid appData provided');
 			}
 			const params = {
@@ -36,7 +35,7 @@
 		}
 
 		function getUser(userId) {
-			if (!util.isNonEmptyString(userId)) {
+			if (!core.isNonEmptyString(userId)) {
 				return core.panic('No valid userId provided');
 			}
 			const params = {

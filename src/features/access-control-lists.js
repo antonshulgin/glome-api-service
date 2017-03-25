@@ -9,7 +9,6 @@
 		const externals = {};
 
 		const core = glomeApiService.core;
-		const util = glomeApiService.util;
 
 		externals.getListForObject = getListForObject;
 		externals.getListForSchema = getListForSchema;
@@ -21,10 +20,10 @@
 		return externals;
 
 		function updateListForSchema(schemaName, listModel) {
-			if (!util.isNonEmptyString(schemaName)) {
+			if (!core.isNonEmptyString(schemaName)) {
 				return core.panic('No valid schemaName provided');
 			}
-			if (!util.isNonEmptyObject(listModel)) {
+			if (!core.isNonEmptyObject(listModel)) {
 				return core.panic('No valid listModel provided');
 			}
 			const params = {
@@ -40,13 +39,13 @@
 		}
 
 		function updateListForObject(schemaName, socialObjectId, listModel) {
-			if (!util.isNonEmptyString(schemaName)) {
+			if (!core.isNonEmptyString(schemaName)) {
 				return core.panic('No valid schemaName provided');
 			}
-			if (!util.isNonEmptyString(socialObjectId)) {
+			if (!core.isNonEmptyString(socialObjectId)) {
 				return core.panic('No valid socialObjectId provided');
 			}
-			if (!util.isNonEmptyObject(listModel)) {
+			if (!core.isNonEmptyObject(listModel)) {
 				return core.panic('No valid listModel provided');
 			}
 			const params = {
@@ -62,10 +61,10 @@
 		}
 
 		function replaceListForSchema(schemaName, listModel) {
-			if (!util.isNonEmptyString(schemaName)) {
+			if (!core.isNonEmptyString(schemaName)) {
 				return core.panic('No valid schemaName provided');
 			}
-			if (!util.isNonEmptyObject(listModel)) {
+			if (!core.isNonEmptyObject(listModel)) {
 				return core.panic('No valid listModel provided');
 			}
 			const params = {
@@ -81,13 +80,13 @@
 		}
 
 		function replaceListForObject(schemaName, socialObjectId, listModel) {
-			if (!util.isNonEmptyString(schemaName)) {
+			if (!core.isNonEmptyString(schemaName)) {
 				return core.panic('No valid schemaName provided');
 			}
-			if (!util.isNonEmptyString(socialObjectId)) {
+			if (!core.isNonEmptyString(socialObjectId)) {
 				return core.panic('No valid socialObjectId provided');
 			}
-			if (!util.isNonEmptyObject(listModel)) {
+			if (!core.isNonEmptyObject(listModel)) {
 				return core.panic('No valid listModel provided');
 			}
 			const params = {
@@ -103,7 +102,7 @@
 		}
 
 		function getListForSchema(schemaName) {
-			if (!util.isNonEmptyString(schemaName)) {
+			if (!core.isNonEmptyString(schemaName)) {
 				return core.panic('No valid schemaName provided');
 			}
 			const params = {
@@ -118,10 +117,10 @@
 		}
 
 		function getListForObject(schemaName, socialObjectId) {
-			if (!util.isNonEmptyString(schemaName)) {
+			if (!core.isNonEmptyString(schemaName)) {
 				return core.panic('No valid schemaName provided');
 			}
-			if (!util.isNonEmptyString(socialObjectId)) {
+			if (!core.isNonEmptyString(socialObjectId)) {
 				return core.panic('No valid socialObjectId provided');
 			}
 			const params = {

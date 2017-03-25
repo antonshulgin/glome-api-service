@@ -9,7 +9,6 @@
 		const externals = {};
 
 		const core = glomeApiService.core;
-		const util = glomeApiService.util;
 
 		externals.createAccount = createAccount;
 		externals.createLinkingToken = createLinkingToken;
@@ -20,7 +19,7 @@
 		return externals;
 
 		function setPublicData(publicData) {
-			if (!util.isNonEmptyObject(publicData)) {
+			if (!core.isNonEmptyObject(publicData)) {
 				return core.panic('No valid publicData provided');
 			}
 			const params = {
@@ -48,7 +47,7 @@
 		}
 
 		function createLinkedAccount(linkId) {
-			if (!util.isNonEmptyString(linkId)) {
+			if (!core.isNonEmptyString(linkId)) {
 				return core.panic('No valid linkId provided');
 			}
 			const params = {
@@ -66,7 +65,7 @@
 		}
 
 		function createLinkingToken(lifetimeMinutes) {
-			if (!util.isNumber(lifetimeMinutes)) {
+			if (!core.isNumber(lifetimeMinutes)) {
 				return core.panic('No valid lifetimeMinutes provided');
 			}
 			const params = {

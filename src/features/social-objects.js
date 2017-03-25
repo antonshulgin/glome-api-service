@@ -9,7 +9,6 @@
 		const externals = {};
 
 		const core = glomeApiService.core;
-		const util = glomeApiService.util;
 
 		externals.createSocialObject = createSocialObject;
 		externals.deleteSocialObject = deleteSocialObject;
@@ -21,13 +20,13 @@
 		return externals;
 
 		function updateSocialObject(schemaName, objectId, objectModel) {
-			if (!util.isNonEmptyString(schemaName)) {
+			if (!core.isNonEmptyString(schemaName)) {
 				return core.panic('No valid schemaName provided');
 			}
-			if (!util.isNonEmptyString(objectId)) {
+			if (!core.isNonEmptyString(objectId)) {
 				return core.panic('No valid objectId provided');
 			}
-			if (!util.isNonEmptyObject(objectModel)) {
+			if (!core.isNonEmptyObject(objectModel)) {
 				return core.panic('No valid objectModel provided');
 			}
 			const params = {
@@ -43,13 +42,13 @@
 		}
 
 		function replaceSocialObject(schemaName, objectId, objectModel) {
-			if (!util.isNonEmptyString(schemaName)) {
+			if (!core.isNonEmptyString(schemaName)) {
 				return core.panic('No valid schemaName provided');
 			}
-			if (!util.isNonEmptyString(objectId)) {
+			if (!core.isNonEmptyString(objectId)) {
 				return core.panic('No valid objectId provided');
 			}
-			if (!util.isNonEmptyObject(objectModel)) {
+			if (!core.isNonEmptyObject(objectModel)) {
 				return core.panic('No valid objectModel provided');
 			}
 			const params = {
@@ -65,7 +64,7 @@
 		}
 
 		function listSocialObjects(schemaName) {
-			if (!util.isNonEmptyString(schemaName)) {
+			if (!core.isNonEmptyString(schemaName)) {
 				return core.panic('No valid schemaName provided');
 			}
 			const params = {
@@ -80,10 +79,10 @@
 		}
 
 		function getSocialObject(schemaName, objectId) {
-			if (!util.isNonEmptyString(schemaName)) {
+			if (!core.isNonEmptyString(schemaName)) {
 				return core.panic('No valid schemaName provided');
 			}
-			if (!util.isNonEmptyString(objectId)) {
+			if (!core.isNonEmptyString(objectId)) {
 				return core.panic('No valid objectId provided');
 			}
 			const params = {
@@ -98,10 +97,10 @@
 		}
 
 		function deleteSocialObject(schemaName, objectId) {
-			if (!util.isNonEmptyString(schemaName)) {
+			if (!core.isNonEmptyString(schemaName)) {
 				return core.panic('No valid schemaName provided');
 			}
-			if (!util.isNonEmptyString(objectId)) {
+			if (!core.isNonEmptyString(objectId)) {
 				return core.panic('No valid objectId provided');
 			}
 			const params = {
@@ -116,10 +115,10 @@
 		}
 
 		function createSocialObject(schemaName, objectModel) {
-			if (!util.isNonEmptyString(schemaName)) {
+			if (!core.isNonEmptyString(schemaName)) {
 				return core.panic('No valid schemaName provided');
 			}
-			if (!util.isNonEmptyObject(objectModel)) {
+			if (!core.isNonEmptyObject(objectModel)) {
 				return core.panic('No valid objectModel provided');
 			}
 			const params = {

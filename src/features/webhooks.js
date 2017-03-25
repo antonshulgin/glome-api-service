@@ -9,7 +9,6 @@
 		const externals = {};
 
 		const core = glomeApiService.core;
-		const util = glomeApiService.util;
 
 		externals.createWebhook = createWebhook;
 		externals.deleteWebhook = deleteWebhook;
@@ -21,10 +20,10 @@
 		return externals;
 
 		function updateWebhook(webhookId, webhookModel) {
-			if (!util.isNonEmptyString(webhookId)) {
+			if (!core.isNonEmptyString(webhookId)) {
 				return core.panic('No valid webhookId provided');
 			}
-			if (!util.isNonEmptyObject(webhookModel)) {
+			if (!core.isNonEmptyObject(webhookModel)) {
 				return core.panic('No valid webhookModel provided');
 			}
 			const params = {
@@ -40,10 +39,10 @@
 		}
 
 		function replaceWebhook(webhookId, webhookModel) {
-			if (!util.isNonEmptyString(webhookId)) {
+			if (!core.isNonEmptyString(webhookId)) {
 				return core.panic('No valid webhookId provided');
 			}
-			if (!util.isNonEmptyObject(webhookModel)) {
+			if (!core.isNonEmptyObject(webhookModel)) {
 				return core.panic('No valid webhookModel provided');
 			}
 			const params = {
@@ -71,7 +70,7 @@
 		}
 
 		function getWebhook(webhookId) {
-			if (!util.isNonEmptyString(webhookId)) {
+			if (!core.isNonEmptyString(webhookId)) {
 				return core.panic('No valid webhookId provided');
 			}
 			const params = {
@@ -86,7 +85,7 @@
 		}
 
 		function deleteWebhook(webhookId) {
-			if (!util.isNonEmptyString(webhookId)) {
+			if (!core.isNonEmptyString(webhookId)) {
 				return core.panic('No valid webhookId provided');
 			}
 			const params = {
@@ -101,7 +100,7 @@
 		}
 
 		function createWebhook(webhookModel) {
-			if (!util.isNonEmptyObject(webhookModel)) {
+			if (!core.isNonEmptyObject(webhookModel)) {
 				return core.panic('No valid webhookModel provided');
 			}
 			const params = {
