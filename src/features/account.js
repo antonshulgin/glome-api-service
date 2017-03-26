@@ -34,7 +34,7 @@
 					authToken: true,
 					appId: true
 				},
-				data: publicData
+				payload: publicData
 			});
 		}
 
@@ -58,7 +58,7 @@
 				includeHeaders: {
 					appId: true
 				},
-				data: {
+				payload: {
 					linkId: linkId
 				}
 			});

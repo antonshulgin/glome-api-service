@@ -37,7 +37,7 @@
 					appId: true,
 					appSecret: true
 				},
-				data: {
+				payload: {
 					name: schemaName,
 					fields: schemaFields
 				}
@@ -57,7 +57,7 @@
 					appId: true,
 					appSecret: true
 				},
-				data: {
+				payload: {
 					name: schemaName,
 					fields: schemaFields
 				}
@@ -115,7 +115,7 @@
 					appId: true,
 					appSecret: true
 				},
-				data: {
+				payload: {
 					name: schemaName,
 					fields: schemaFields
 				}

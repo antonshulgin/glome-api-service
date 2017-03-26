@@ -82,8 +82,8 @@
 						request.setRequestHeader('Content-Type', params.contentType);
 					}
 				}
-				if (isNonEmptyObject(params.data)) {
-					request.send(params.data);
+				if (isNonEmptyObject(params.payload)) {
+					request.send(params.payload);
 				} else {
 					request.send();
 				}

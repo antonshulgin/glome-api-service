@@ -40,7 +40,7 @@
 					authToken: true,
 					appId: true
 				},
-				data: {
+				payload: {
 					model: objectModel
 				}
 			});
@@ -61,7 +61,7 @@
 					authToken: true,
 					appId: true
 				},
-				data: {
+				payload: {
 					model: objectModel
 				}
 			});
@@ -133,7 +133,7 @@
 					authToken: true,
 					appId: true
 				},
-				data: {
+				payload: {
 					model: objectModel
 				}
 			});

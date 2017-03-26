@@ -33,7 +33,7 @@
 					appId: true,
 					appSecret: true
 				},
-				data: appData
+				payload: appData
 			});
 		}
 

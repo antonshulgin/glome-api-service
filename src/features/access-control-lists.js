@@ -38,7 +38,7 @@
 					appId: true,
 					appSecret: true
 				},
-				data: listModel
+				payload: listModel
 			});
 		}
 
@@ -57,7 +57,7 @@
 					appId: true,
 					appSecret: true
 				},
-				data: listModel
+				payload: listModel
 			});
 		}
 
@@ -74,7 +74,7 @@
 					appId: true,
 					appSecret: true
 				},
-				data: listModel
+				payload: listModel
 			});
 		}
 
@@ -93,7 +93,7 @@
 					appId: true,
 					appSecret: true
 				},
-				data: listModel
+				payload: listModel
 			});
 		}
 

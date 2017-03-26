@@ -37,7 +37,7 @@
 					appId: true,
 					appSecret: true
 				},
-				data: webhookModel
+				payload: webhookModel
 			});
 		}
 
@@ -54,7 +54,7 @@
 					appId: true,
 					appSecret: true
 				},
-				data: webhookModel
+				payload: webhookModel
 			});
 		}
 
@@ -113,7 +113,7 @@
 					appId: true,
 					appSecret: true
 				},
-				data: webhookModel
+				payload: webhookModel
 			});
 		}
 	}
