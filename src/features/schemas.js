@@ -7,7 +7,6 @@
 	function schemas() {
 		const ERR_NO_SCHEMA_NAME = 'No valid schemaName provided';
 		const ERR_NO_SCHEMA_FIELDS = 'No valid schemaFields provided';
-		const ERR_NO_SCHEMA_MODEL = 'No valid schemaModel provided';
 
 		const panic = glomeApiService.panic;
 		const isNonEmptyString = glomeApiService.isNonEmptyString;
@@ -38,13 +37,16 @@
 					appId: true,
 					appSecret: true
 				},
-				data: schemaFields
+				data: {
+					name: schemaName,
+					fields: schemaFields
+				}
 			});
 		}
 
-		function replaceSchema(schemaName, schemaModel) {
+		function replaceSchema(schemaName, schemaFields) {
 			if (!isNonEmptyString(schemaName)) { return panic(ERR_NO_SCHEMA_NAME); }
-			if (!isNonEmptyObject(schemaModel)) { return panic(ERR_NO_SCHEMA_MODEL); }
+			if (!isNonEmptyObject(schemaFields)) { return panic(ERR_NO_SCHEMA_FIELDS); }
 			return produceRequest({
 				method: 'put',
 				path: '/schemas/:schemaName',
@@ -55,7 +57,10 @@
 					appId: true,
 					appSecret: true
 				},
-				data: schemaModel
+				data: {
+					name: schemaName,
+					fields: schemaFields
+				}
 			});
 		}
 
@@ -100,8 +105,9 @@
 			});
 		}
 
-		function createSchema(schemaModel) {
-			if (!isNonEmptyObject(schemaModel)) { return panic(ERR_NO_SCHEMA_MODEL); }
+		function createSchema(schemaName, schemaFields) {
+			if (!isNonEmptyString(schemaName)) { return panic(ERR_NO_SCHEMA_NAME); }
+			if (!isNonEmptyObject(schemaFields)) { return panic(ERR_NO_SCHEMA_FIELDS); }
 			return produceRequest({
 				method: 'post',
 				path: '/schemas',
@@ -109,7 +115,10 @@
 					appId: true,
 					appSecret: true
 				},
-				data: schemaModel
+				data: {
+					name: schemaName,
+					fields: schemaFields
+				}
 			});
 		}
 	}

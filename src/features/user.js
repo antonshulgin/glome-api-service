@@ -54,4 +54,3 @@
 	}
 
 })(this.glomeApiService);
-

@@ -40,7 +40,9 @@
 					authToken: true,
 					appId: true
 				},
-				data: objectModel
+				data: {
+					model: objectModel
+				}
 			});
 		}
 
@@ -59,7 +61,9 @@
 					authToken: true,
 					appId: true
 				},
-				data: objectModel
+				data: {
+					model: objectModel
+				}
 			});
 		}
 
@@ -95,6 +99,10 @@
 			});
 		}
 
+		// A payload within a DELETE request message has no defined semantics;
+		// sending a payload body on a DELETE request might cause some existing
+		// implementations to reject the request.
+		// https://tools.ietf.org/html/rfc7231#section-4.3.5
 		function deleteSocialObject(schemaName, objectId) {
 			if (!isNonEmptyString(schemaName)) { return panic(ERR_NO_SCHEMA_NAME); }
 			if (!isNonEmptyString(objectId)) { return panic(ERR_NO_OBJECT_ID); }
@@ -125,11 +133,11 @@
 					authToken: true,
 					appId: true
 				},
-				data: objectModel
+				data: {
+					model: objectModel
+				}
 			});
 		}
 	}
 
 })(this.glomeApiService);
-
-

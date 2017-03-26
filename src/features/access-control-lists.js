@@ -7,7 +7,7 @@
 	function accessControlLists() {
 		const ERR_NO_SCHEMA_NAME = 'No valid schemaName provided';
 		const ERR_NO_LIST_MODEL = 'No valid listModel provided';
-		const ERR_NO_SOCIAL_OBJECT_ID = 'No valid socialObjectId provided';
+		const ERR_NO_OBJECT_ID = 'No valid objectId provided';
 
 		const panic = glomeApiService.panic;
 		const isNonEmptyString = glomeApiService.sNonEmptyString;
@@ -42,16 +42,16 @@
 			});
 		}
 
-		function updateListForObject(schemaName, socialObjectId, listModel) {
+		function updateListForObject(schemaName, objectId, listModel) {
 			if (!isNonEmptyString(schemaName)) { return panic(ERR_NO_SCHEMA_NAME); }
-			if (!isNonEmptyString(socialObjectId)) { return panic(ERR_NO_SOCIAL_OBJECT_ID); }
+			if (!isNonEmptyString(objectId)) { return panic(ERR_NO_OBJECT_ID); }
 			if (!isNonEmptyObject(listModel)) { return panic(ERR_NO_LIST_MODEL); }
 			return produceRequest({
 				method: 'patch',
-				path: '/schemas/:schemaName/:socialObjectId/acl',
+				path: '/schemas/:schemaName/:objectId/acl',
 				pathParams: {
 					schemaName: schemaName,
-					socialObjectId: socialObjectId
+					objectId: objectId
 				},
 				includeHeaders: {
 					appId: true,
@@ -78,16 +78,16 @@
 			});
 		}
 
-		function replaceListForObject(schemaName, socialObjectId, listModel) {
+		function replaceListForObject(schemaName, objectId, listModel) {
 			if (!isNonEmptyString(schemaName)) { return panic(ERR_NO_SCHEMA_NAME); }
-			if (!isNonEmptyString(socialObjectId)) { return panic(ERR_NO_SOCIAL_OBJECT_ID); }
+			if (!isNonEmptyString(objectId)) { return panic(ERR_NO_OBJECT_ID); }
 			if (!isNonEmptyObject(listModel)) { return panic(ERR_NO_LIST_MODEL); }
 			return produceRequest({
 				method: 'put',
-				path: '/schemas/:schemaName/:socialObjectId',
+				path: '/schemas/:schemaName/:objectId',
 				pathParams: {
 					schemaName: schemaName,
-					socialObjectId: socialObjectId
+					objectId: objectId
 				},
 				includeHeaders: {
 					appId: true,
@@ -112,15 +112,15 @@
 			});
 		}
 
-		function getListForObject(schemaName, socialObjectId) {
+		function getListForObject(schemaName, objectId) {
 			if (!isNonEmptyString(schemaName)) { return panic(ERR_NO_SCHEMA_NAME); }
-			if (!isNonEmptyString(socialObjectId)) { return panic(ERR_NO_SOCIAL_OBJECT_ID); }
+			if (!isNonEmptyString(objectId)) { return panic(ERR_NO_OBJECT_ID); }
 			return produceRequest({
 				method: 'get',
-				path: '/schemas/:schemaName/:socialObjectId/acl',
+				path: '/schemas/:schemaName/:objectId/acl',
 				pathParams: {
 					schemaName: schemaName,
-					socialObjectId: socialObjectId
+					objectId: objectId
 				},
 				includeHeaders: {
 					appId: true,

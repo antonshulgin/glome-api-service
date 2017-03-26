@@ -39,7 +39,7 @@
 			return pathTemplate;
 
 			function applyPathParam(pathParam) {
-				var patternString = new RegExp('\:' + pathParam, 'gi');
+				const patternString = new RegExp('\:' + pathParam, 'gi');
 				pathTemplate = pathTemplate.replace(
 					patternString,
 					encodeURIComponent(pathParams[pathParam])

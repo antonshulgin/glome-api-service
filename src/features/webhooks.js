@@ -69,6 +69,11 @@
 			});
 		}
 
+		// The API doc includes a JSON payload for this one
+		// A payload within a GET request message has no defined semantics;
+		// sending a payload body on a GET request might cause some existing
+		// implementations to reject the request.
+		// https://tools.ietf.org/html/rfc7231#section-4.3.1
 		function getWebhook(webhookId) {
 			if (!isNonEmptyString(webhookId)) { return panic(ERR_NO_WEBHOOK_ID); }
 			return produceRequest({
